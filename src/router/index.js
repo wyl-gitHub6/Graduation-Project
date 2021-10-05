@@ -1,20 +1,69 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from '../views/Home.vue'
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    redirect:'/home'
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
+    path: '/home',
+    name: 'Home',
+    component:()=>import('../views/Home'),
+    children:[
+      {
+        path:'/home',
+        redirect:'/index'
+      },
+      {
+        path:'/index',
+        name: "index",
+        meta: {
+          title: '首页'
+        },
+        component:()=>import('../views/Index')
+      },
+      {
+        path:'/user',
+        name: "user",
+        meta: {
+          title: '个人信息'
+        },
+        component:()=>import('../views/User')
+      },
+      {
+        path:'/statistical',
+        name: "statistical",
+        meta: {
+          title: '选课统计'
+        },
+        component:()=>import('../views/Statistical')
+      },
+      {
+        path:'/scoreStatistical',
+        name: "scoreStatistical",
+        meta: {
+          title: '成绩统计'
+        },
+        component:()=>import('../views/ScoreStatistical')
+      },
+      {
+        path:'/course',
+        name: "course",
+        meta: {
+          title: '课程管理'
+        },
+        component:()=>import('../views/Course')
+      },
+      {
+        path:'/chooseCourse',
+        name: "chooseCourse",
+        meta: {
+          title: '选课'
+        },
+        component:()=>import('../views/ChooseCourse')
+      },
+    ]
+  },
 ]
 
 const router = createRouter({

@@ -87,6 +87,17 @@ export default {
                     }
                 ],
             },
+            {
+                icon: "el-icon-s-home",
+                index: "5",
+                title: "人员管理",
+                subs: [
+                    {
+                        index: "/teacher",
+                        title: "教师管理",
+                    }
+                ],
+            },
 
         ];
 

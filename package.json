@@ -13,7 +13,6 @@
     "echarts": "^5.2.1",
     "element-plus": "1.0.2-beta.52",
     "moment": "^2.29.1",
-    "swiper": "^7.0.8",
     "vue": "^3.0.0",
     "vue-axios": "^3.3.6",
     "vue-cropperjs": "^5.0.0",

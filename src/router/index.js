@@ -62,6 +62,14 @@ const routes = [
         },
         component:()=>import('../views/ChooseCourse')
       },
+      {
+        path:'/teacher',
+        name: "teacher",
+        meta: {
+          title: '教师管理'
+        },
+        component:()=>import('../views/Teacher')
+      }
     ]
   },
 ]

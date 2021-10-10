@@ -69,7 +69,47 @@ const routes = [
           title: '教师管理'
         },
         component:()=>import('../views/Teacher')
-      }
+      },
+      {
+        path:'/college',
+        name: "college",
+        meta: {
+          title: '院系管理'
+        },
+        component:()=>import('../views/College')
+      },
+      {
+        path:'/professional',
+        name: "professional",
+        meta: {
+          title: '专业管理'
+        },
+        component:()=>import('../views/Professional')
+      },
+      {
+        path:'/grade',
+        name: "grade",
+        meta: {
+          title: '年级管理'
+        },
+        component:()=>import('../views/Grade')
+      },
+      {
+        path:'/classes',
+        name: "classes",
+        meta: {
+          title: '班级管理'
+        },
+        component:()=>import('../views/Classes')
+      },
+      {
+        path:'/student',
+        name: "student",
+        meta: {
+          title: '学生管理'
+        },
+        component:()=>import('../views/Student')
+      },
     ]
   },
 ]

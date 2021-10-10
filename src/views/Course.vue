@@ -1,9 +1,8 @@
 <template>
-
   <div class="common-layout">
     <el-container>
       <el-main>
-    <el-button type="success" icon="el-icon-plus" @click="Model = true,title='添加订单信息',btn=true,toAdd()" style="margin-left: 100px;"></el-button>
+    <el-button type="success" icon="el-icon-plus" @click="Model = true,course_form={},title='录入课程信息',btn=true,toAdd()" style="margin-left: 100px;"></el-button>
     <el-button type="danger" icon="el-icon-folder-delete" @click="deleteBatch" style="margin-left: 30px;"></el-button>
 
         <el-input placeholder="输入课程编号或课程名称" v-model="search"
@@ -28,7 +27,7 @@
       <el-table-column prop="name" label="姓名" width="120"> </el-table-column>
       <el-table-column label="操作">
         <template #default="scope">
-          <el-button type="primary" icon="el-icon-edit"  @click="model=true,title='编辑科室信息',btn=false,handleEdit(scope.$index, scope.row)"></el-button>
+          <el-button type="primary" icon="el-icon-edit"  @click="model=true,title='编辑课程信息',btn=false,handleEdit(scope.$index, scope.row)"></el-button>
           <el-button type="danger" icon="el-icon-delete" @click="handleDelete(scope.$index, scope.row)"></el-button>
         </template>
       </el-table-column>

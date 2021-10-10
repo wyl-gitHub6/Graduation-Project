@@ -95,6 +95,54 @@ export default {
                     {
                         index: "/teacher",
                         title: "教师管理",
+                    },
+                    {
+                        index: "/student",
+                        title: "学生管理",
+                    },
+                ],
+            },
+            {
+                icon: "el-icon-s-home",
+                index: "6",
+                title: "院系管理",
+                subs: [
+                    {
+                        index: "/college",
+                        title: "院系管理",
+                    }
+                ],
+            },
+            {
+                icon: "el-icon-s-home",
+                index: "7",
+                title: "专业管理",
+                subs: [
+                    {
+                        index: "/professional",
+                        title: "专业管理",
+                    }
+                ],
+            },
+            {
+                icon: "el-icon-s-home",
+                index: "8",
+                title: "年级管理",
+                subs: [
+                    {
+                        index: "/grade",
+                        title: "年级管理",
+                    }
+                ],
+            },
+            {
+                icon: "el-icon-s-home",
+                index: "9",
+                title: "班级管理",
+                subs: [
+                    {
+                        index: "/classes",
+                        title: "班级管理",
                     }
                 ],
             },

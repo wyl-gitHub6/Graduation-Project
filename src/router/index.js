@@ -110,6 +110,14 @@ const routes = [
         },
         component:()=>import('../views/Student')
       },
+      {
+        path:'/driverClasses',
+        name: "driverClasses",
+        meta: {
+          title: '分班管理'
+        },
+        component:()=>import('../views/DriverClasses')
+      },
     ]
   },
 ]

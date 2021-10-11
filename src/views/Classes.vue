@@ -28,11 +28,11 @@
           <el-table-column prop="classesAllNumber" label="人数限额"> </el-table-column>
           <el-table-column prop="classesNumber" label="当前人数">
             <template #default="scope">
-              <span v-if="scope.row.classesNumber == null" style="color: red">0</span>
-              <span v-if="scope.row.classesNumber != null" style="color: #20a0ff">{{scope.row.classesNumber}}</span>
+              <span v-if="scope.row.classesNumber == 0" style="color: red">0</span>
+              <span v-if="scope.row.classesNumber != 0" style="color: #20a0ff">{{scope.row.classesNumber}}</span>
             </template>
           </el-table-column>
-          <el-table-column prop="classesState" label="状态">
+          <el-table-column label="状态">
             <template #default="scope">
               <span v-if="scope.row.classesNumber == scope.row.classesAllNumber" style="color: red">已满</span>
               <span v-if="scope.row.classesNumber != scope.row.classesAllNumber" style="color: #20a0ff">未满</span>

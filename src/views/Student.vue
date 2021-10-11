@@ -57,7 +57,7 @@
               <span v-if="scope.row.studentSex == 1" style="color: #1abc9c">女</span>
             </template>
           </el-table-column>
-          <el-table-column prop="studentCard" label="身份证号"> </el-table-column>
+          <el-table-column prop="studentCard" label="身份证号" width="170px;"> </el-table-column>
           <el-table-column prop="studentEmail" label="邮箱"> </el-table-column>
           <el-table-column prop="studentPhone" label="手机号" > </el-table-column>
           <el-table-column prop="classes.classesName" label="所在班级">

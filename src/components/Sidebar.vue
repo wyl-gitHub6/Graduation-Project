@@ -66,7 +66,7 @@ export default {
                 ],
             },
             {
-                icon: "el-icon-s-home",
+                icon: "el-icon-notebook-1",
                 index: "3",
                 title: "课程",
                 subs: [
@@ -88,7 +88,7 @@ export default {
                 ],
             },
             {
-                icon: "el-icon-s-home",
+                icon: "el-icon-s-custom",
                 index: "5",
                 title: "人员管理",
                 subs: [
@@ -143,6 +143,17 @@ export default {
                     {
                         index: "/classes",
                         title: "班级管理",
+                    }
+                ],
+            },
+            {
+                icon: "el-icon-s-home",
+                index: "10",
+                title: "分班管理",
+                subs: [
+                    {
+                        index: "/driverClasses",
+                        title: "分班管理",
                     }
                 ],
             },

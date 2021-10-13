@@ -10,7 +10,7 @@
                     style="width: 60px; height: 60px;margin-top: 5px;"
                     :src="url"
             ></el-image>-->
-            <span style="margin-left: 15px;">济世华安医疗系统</span>
+            <span style="margin-left: 15px;">学生成绩管理系统</span>
         </div>
         <div class="header-right">
             <div class="header-user-con">
@@ -31,11 +31,13 @@
                         </el-dropdown-menu>
                     </template>
                 </el-dropdown>
+                <el-color-picker style="margin-left: 20px;" v-model="color" :predefine="predefineColors" @change="setBackgroundColor" size="small">个性化：</el-color-picker>
             </div>
         </div>
     </div>
 </template>
 <script>
+import colorChange from "../assets/js/colorChange";
 import { computed, onMounted } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
@@ -43,6 +45,27 @@ import { defineComponent, reactive, toRefs } from 'vue'
 import {ElMessage} from "element-plus";
 export default {
     setup() {
+        const color = '#474787';
+
+        const predefineColors = [
+            '#143556',
+            '#ff4500',
+            '#ff8c00',
+            '#ffd700',
+            '#90ee90',
+            '#00ced1',
+            '#1e90ff',
+            '#c71585',
+            'rgba(255, 69, 0, 0.68)',
+            'rgb(255, 120, 0)',
+            'hsv(51, 100, 98)',
+            'hsva(120, 40, 94, 0.5)',
+            'hsl(181, 100%, 37%)',
+            'hsla(209, 100%, 56%, 0.73)',
+            '#c7158577',
+        ];
+
+
         const username = JSON.parse(sessionStorage.getItem("user"));
         const message = 2;
 
@@ -86,8 +109,19 @@ export default {
             collapseChage,
             handleCommand,
             ...toRefs(state),
+            color,
+            predefineColors,
         };
     },
+    methods:{
+        setBackgroundColor(){
+            document.body.style.setProperty('--background-color',this.color)
+            let footColor = colorChange.setFootColor(document.body.style.getPropertyValue('--background-color'),'#ffffff','#000000')
+            document.body.style.setProperty('--fontColor',footColor)
+            let lingtcolor = colorChange.LightenDarkenColor(footColor,10)
+            this.sidebarColor = 'background-color: var(--background-color)'
+        }
+    }
 };
 </script>
 <style scoped>
@@ -97,7 +131,7 @@ export default {
     width: 100%;
     height: 70px;
     font-size: 22px;
-    color: #fff;
+    color: #ffffff;
 }
 .collapse-btn {
     float: left;
@@ -112,7 +146,7 @@ export default {
 }
 .header-right {
     float: right;
-    padding-right: 50px;
+    padding-right: 120px;
 }
 .header-user-con {
     display: flex;

@@ -33,7 +33,7 @@
     setup: () => {
       const option = ref({
         title: {
-          text: "学生学课情况统计图",
+          text: "学生选课情况统计图",
           left: "center"
         },
         tooltip: {

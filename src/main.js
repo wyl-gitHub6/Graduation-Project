@@ -7,6 +7,7 @@ import 'element-plus/lib/theme-chalk/index.css'
 import ECharts from 'vue-echarts'
 import '../vue.config'
 import zhCn from 'element-plus/es/locale/lang/zh-cn'
+import './assets/css/themes.css'
 const app = createApp(App)
 
 app

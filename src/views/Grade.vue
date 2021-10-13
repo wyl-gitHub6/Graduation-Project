@@ -50,7 +50,7 @@
 
         <!--弹框开始-->
         <div>
-          <el-dialog :title="title" v-model="model" width="30%" center>
+          <el-dialog :title="title" v-model="model" width="25%" center>
             <el-form :label-position="labelPosition" label-width="80px" :model="grade_form"
                      :rules="rules"
                      ref="ruleForm">

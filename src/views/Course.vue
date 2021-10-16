@@ -7,6 +7,16 @@
 
         <el-input placeholder="输入课程编号或课程名称" v-model="search"
                   clearable style="width: 260px;margin-left: 150px;"></el-input>
+
+        <el-select v-model="courseState" placeholder="请选择" filterable style="margin-left: 10px;">
+          <el-option
+                  v-for="item in state_list"
+                  :key="item.value"
+                  :label="item.name"
+                  :value="item.value">
+          </el-option>
+        </el-select>
+
         <el-button type="primary" @click="load" icon="el-icon-search" style="margin-left: 10px;">搜索</el-button>
         <br><br>
 
@@ -21,14 +31,14 @@
                 :default-sort = "{prop: 'date', order: 'descending'}"
                 @selection-change="handleSelectionChange"
         >
-          <el-table-column type="selection" width="55"> </el-table-column>
+          <el-table-column type="selection" width="30"> </el-table-column>
           <el-table-column prop="id" label="Id" v-if="isShow"></el-table-column>
           <el-table-column prop="courseNum" label="课程编号"></el-table-column>
           <el-table-column prop="courseName" label="课程名称"> </el-table-column>
           <el-table-column prop="courseDesc" label="课程描述"> </el-table-column>
           <el-table-column label="照片" width="100px;">
             <template #default="scope">
-              <img :src="scope.row.courseImg" alt="" style="height: 100px;">
+              <img :src="scope.row.courseImg" alt="" style="height: 80px;">
             </template>
           </el-table-column>
           <el-table-column label="课程类别" width="100px;">
@@ -128,7 +138,8 @@
                         :on-remove="handleRemove"
                         :on-success="upload_success"
                         :file-list="fileList"
-                        list-type="picture">
+                        list-type="picture"
+                        ref='upload'>
                   <el-button size="small" type="primary">点击上传</el-button>
                 </el-upload>
               </el-form-item>
@@ -195,14 +206,19 @@
         model:false,
         title:'',
         search:'',
-        model:false,
         //表单对齐方式
         labelPosition: 'right',
-        course_form:{courseCredit: 1,startTime:'',endTime:'',teacher:{}},
+        course_form:{courseCredit: 1,startTime:'',endTime:'',teacher:{},courseDate:[]},
         isShow:false,
         btn:false,
         fileList:[],
         teacherList:[],
+        courseState:'',
+        state_list:[
+          {value:-1,name:'未选择'},
+          {value:0,name:'必修课'},
+          {value:1,name:'选修课'},
+        ],
 
         rules:{
           courseName: [
@@ -251,8 +267,16 @@
           }
         }).then(res=>{
           if (res.code == 0){
-            this.course_form = res.data
-
+            this.course_form.courseId = res.data.courseId
+            this.course_form.courseName = res.data.courseName
+            this.course_form.courseNum = res.data.courseNum
+            this.course_form.courseDesc = res.data.courseDesc
+            this.course_form.courseImg = res.data.courseImg
+            this.course_form.courseCredit = res.data.courseCredit
+            this.course_form.courseState = res.data.courseState
+            this.course_form.teacher = res.data.teacher
+            this.course_form.courseDate[0] = res.data.startTime
+            this.course_form.courseDate[1] = res.data.endTime
           }else{
             console.log(res.message)
           }
@@ -321,7 +345,7 @@
         }
       },
       toAdd(){
-        this.course_form={courseCredit: 1,startTime:'',endTime:'',teacher:{}}
+        this.course_form={courseCredit: 1,startTime:'',endTime:'',teacher:{},courseDate:[]}
         request.get('api/teacher/findAll').then(res=>{
           this.teacherList = res.data
         })
@@ -337,6 +361,7 @@
               return
             }
             this.model = false;
+            this.$refs.upload.clearFiles()
             request.post('/api/course/insert',this.course_form).then(res=>{
               if (res.code == 0){
                 ElMessage.success({
@@ -365,7 +390,9 @@
         this.$refs[formName].validate((valid) => {
           if (valid) {
             this.model = false
-            request.put('/api/course/update',this.course_form).then(res=>{
+            this.$refs.upload.clearFiles()
+            console.log(this.course_form)
+            /*request.put('/api/course/update',this.course_form).then(res=>{
               if(res.code == 0){
                 ElMessage.success({
                   message: res.message,
@@ -378,7 +405,7 @@
                   type: 'error'
                 });
               }
-            })
+            })*/
           } else {
             ElMessage.error({
               message: "请添加完整信息",
@@ -394,7 +421,8 @@
             currentPage:this.currentPage,
             pageSize:this.pageSize,
             courseNum:this.search,
-            courseName:this.search
+            courseName:this.search,
+            courseState:this.courseState
           }
         }).then(res=>{
           this.tableData = res.data.list

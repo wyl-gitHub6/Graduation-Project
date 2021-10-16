@@ -81,11 +81,11 @@ export default {
             {
                 icon: "el-icon-s-home",
                 index: "4",
-                title: "选课",
+                title: "排课",
                 subs: [
                     {
                         index: "/chooseCourse",
-                        title: "选课",
+                        title: "排课",
                     }
                 ],
             },

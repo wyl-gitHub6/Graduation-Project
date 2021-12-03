@@ -13,6 +13,7 @@
   } from "echarts/components";
   import VChart, { THEME_KEY } from "vue-echarts";
   import { ref, defineComponent } from "vue";
+  import request from "../utils/request";
 
   use([
     CanvasRenderer,
@@ -43,7 +44,7 @@
         legend: {
           orient: "vertical",
           left: "left",
-          data: ["语文", "数学", "英语", "Video Ads", "Search Engines"]
+          data: []
         },
         series: [
           {
@@ -51,13 +52,7 @@
             type: "pie",
             radius: "55%",
             center: ["50%", "60%"],
-            data: [
-              { value: 335, name: "语文" },
-              { value: 310, name: "数学" },
-              { value: 234, name: "英语" },
-              { value: 135, name: "Video Ads" },
-              { value: 1548, name: "Search Engines" }
-            ],
+            data: [],
             emphasis: {
               itemStyle: {
                 shadowBlur: 10,
@@ -70,6 +65,20 @@
       });
 
       return { option };
+    },
+    methods:{
+       load(){
+          request.get('/api/score/statistical').then(res=>{
+              for (let i = 0;i<res.data.length;i++){
+                 this.option.legend.data[i] = res.data[i].course.name
+                 this.option.series[0].data[i] =  res.data[i].course
+              }
+          })
+       },
+
+    },
+    created() {
+       this.load()
     }
   })
 </script>

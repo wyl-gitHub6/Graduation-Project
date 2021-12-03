@@ -291,7 +291,7 @@
         pageSize:5,
         total:0,
         currentPageStudent: 1,
-        pageSizeStudent:5,
+        pageSizeStudent:4,
         totalStudent:0,
         /*弹窗*/
         model:false,

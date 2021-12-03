@@ -21,16 +21,16 @@
             >
               <el-descriptions-item v-for="item in courseList">
                 <template #label>
-                  <el-tag size="medium" style="margin-left: 15px;"><i class="el-icon-loading"></i>课程名称</el-tag>
-                  <el-tag size="medium" style="margin-left: 15px;"><i class="el-icon-loading"></i>课程编号</el-tag>
-                  <el-tag size="medium" style="margin-left: 15px;"><i class="el-icon-loading"></i>课程描述</el-tag>
-                  <el-tag size="medium" style="margin-left: 15px;"><i class="el-icon-loading"></i>学分</el-tag>
-                  <el-button type="primary" style="margin-left: 15px;" icon="el-icon-delete" size="small" @click="deleteCourse(item.courseId)"></el-button>
+                  <el-tag size="50px;" style="margin-left: 5px;margin-bottom: 5px;"><i class="el-icon-loading"></i>课程名称</el-tag>
+                  <el-tag size="50px;" style="margin-left: 5px;margin-bottom: 5px;"><i class="el-icon-loading"></i>课程编号</el-tag>
+                  <el-tag size="50px;" style="margin-left: 5px;margin-bottom: 5px;"><i class="el-icon-loading"></i>课程描述</el-tag>
+                  <el-tag size="50px" style="margin-left: 5px;margin-bottom: 5px;"><i class="el-icon-loading"></i>学分</el-tag>
+                  <el-button type="primary" style="margin-left: 10px;" icon="el-icon-delete" size="small" @click="deleteCourse(item.courseId)"></el-button>
                 </template>
-                <el-tag  size="medium" style="margin-left: 15px;">{{item.courseName}}</el-tag>
-                <el-tag  size="medium" style="margin-left: 15px;">{{item.courseNum}}</el-tag>
-                <el-tag  size="medium" style="margin-left: 15px;">{{item.courseDesc}}</el-tag>
-                <el-tag  size="medium" style="margin-left: 15px;">{{item.courseCredit}}</el-tag>
+                <el-tag  size="50px" style="margin-left: 5px;margin-bottom: 5px;">{{item.courseName}}</el-tag>
+                <el-tag  size="50px" style="margin-left: 5px;margin-bottom: 5px;">{{item.courseNum}}</el-tag>
+                <el-tag  size="50px" style="margin-left: 5px;margin-bottom: 5px;">{{item.courseDesc}}</el-tag>
+                <el-tag  size="50px" style="margin-left: 5px;margin-bottom: 5px;">{{item.courseCredit}}</el-tag>
               </el-descriptions-item>
 
             </el-descriptions>
@@ -255,7 +255,6 @@
 <script>
   import request from "../utils/request";
   import { ElMessage } from 'element-plus';
-  import { h } from 'vue'
 
   export default {
     name: "ChooseCourse",
@@ -283,7 +282,7 @@
         tableData: [],
         multipleSelection: [],
         currentPage: 1,
-        pageSize:5,
+        pageSize:4,
         total:0,
         currentPageClasses: 1,
         pageSizeClasses:5,

@@ -7,7 +7,7 @@
         </div>
         <div class="logo" style="display: flex">
             <!--<el-image
-                    style="width: 60px; height: 60px;margin-top: 5px;"
+                    style="width: 130px; height: 80px;"
                     :src="url"
             ></el-image>-->
             <span style="margin-left: 15px;">学生成绩管理系统</span>
@@ -16,12 +16,12 @@
             <div class="header-user-con">
                 <!-- 用户头像 -->
                 <div class="user-avator">
-                    <img src="../assets/img/img.jpg" />
+                    <img :src=username.userImg />
                 </div>
                 <!-- 用户名下拉菜单 -->
                 <el-dropdown class="user-name" trigger="click" @command="handleCommand">
                     <span class="el-dropdown-link">
-                        {{username}}
+                        {{username.userName}}
                         <i class="el-icon-caret-bottom"></i>
                     </span>
                     <template #dropdown>
@@ -31,7 +31,7 @@
                         </el-dropdown-menu>
                     </template>
                 </el-dropdown>
-                <el-color-picker style="margin-left: 20px;" v-model="color" :predefine="predefineColors" @change="setBackgroundColor" size="small">个性化：</el-color-picker>
+                <el-color-picker style="margin-left: 30px;" v-model="color" :predefine="predefineColors" @change="setBackgroundColor" size="small">个性化：</el-color-picker>
             </div>
         </div>
     </div>
@@ -99,7 +99,7 @@ export default {
 
         const state = reactive({
             fits: ['fill', 'contain', 'cover', 'none', 'scale-down'],
-            /*url: require('../assets/img/logo.jpg'),*/
+            /*url: require('../assets/img/logo.png'),*/
         })
 
         return {
@@ -146,7 +146,7 @@ export default {
 }
 .header-right {
     float: right;
-    padding-right: 120px;
+    padding-right: 110px;
 }
 .header-user-con {
     display: flex;
@@ -180,11 +180,8 @@ export default {
 .btn-bell .el-icon-bell {
     color: #fff;
 }
-.user-name {
-    margin-left: 10px;
-}
 .user-avator {
-    margin-left: 20px;
+    margin-right: 10px;
 }
 .user-avator img {
     display: block;
@@ -198,5 +195,14 @@ export default {
 }
 .el-dropdown-menu__item {
     text-align: center;
+}
+.user-avator {
+    margin-right: 10px;
+}
+.user-avator img {
+    display: block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
 }
 </style>

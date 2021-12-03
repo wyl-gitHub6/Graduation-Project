@@ -46,46 +46,46 @@ export default {
                 title: "首页",
             },
             {
-                icon: "el-icon-s-home",
+                icon: "el-icon-s-data",
                 index: "1",
-                title: "选课统计",
+                title: "院系管理",
                 subs: [
                     {
-                        index: "/statistical",
-                        title: "选课统计",
+                        index: "/college",
+                        title: "院系管理",
                     }
                 ],
             },
             {
-                icon: "el-icon-s-home",
+                icon: "el-icon-refrigerator",
                 index: "2",
-                title: "成绩统计",
+                title: "专业管理",
                 subs: [
                     {
-                        index: "/scoreStatistical",
-                        title: "成绩统计",
+                        index: "/professional",
+                        title: "专业管理",
                     }
                 ],
             },
             {
-                icon: "el-icon-notebook-1",
+                icon: "el-icon-potato-strips",
                 index: "3",
-                title: "课程",
+                title: "年级管理",
                 subs: [
                     {
-                        index: "/course",
-                        title: "课程管理",
+                        index: "/grade",
+                        title: "年级管理",
                     }
                 ],
             },
             {
-                icon: "el-icon-s-home",
+                icon: "el-icon-box",
                 index: "4",
-                title: "排课",
+                title: "班级管理",
                 subs: [
                     {
-                        index: "/chooseCourse",
-                        title: "排课",
+                        index: "/classes",
+                        title: "班级管理",
                     }
                 ],
             },
@@ -94,6 +94,10 @@ export default {
                 index: "5",
                 title: "人员管理",
                 subs: [
+                    {
+                        index: "/users",
+                        title: "管理员维护",
+                    },
                     {
                         index: "/teacher",
                         title: "教师管理",
@@ -105,52 +109,19 @@ export default {
                 ],
             },
             {
-                icon: "el-icon-s-home",
+                icon: "el-icon-notebook-1",
                 index: "6",
-                title: "院系管理",
+                title: "课程管理",
                 subs: [
                     {
-                        index: "/college",
-                        title: "院系管理",
+                        index: "/course",
+                        title: "课程管理",
                     }
                 ],
             },
             {
-                icon: "el-icon-s-home",
+                icon: "el-icon-printer",
                 index: "7",
-                title: "专业管理",
-                subs: [
-                    {
-                        index: "/professional",
-                        title: "专业管理",
-                    }
-                ],
-            },
-            {
-                icon: "el-icon-s-home",
-                index: "8",
-                title: "年级管理",
-                subs: [
-                    {
-                        index: "/grade",
-                        title: "年级管理",
-                    }
-                ],
-            },
-            {
-                icon: "el-icon-s-home",
-                index: "9",
-                title: "班级管理",
-                subs: [
-                    {
-                        index: "/classes",
-                        title: "班级管理",
-                    }
-                ],
-            },
-            {
-                icon: "el-icon-s-home",
-                index: "10",
                 title: "分班管理",
                 subs: [
                     {
@@ -159,7 +130,43 @@ export default {
                     }
                 ],
             },
-
+            {
+                icon: "el-icon-bank-card",
+                index: "8",
+                title: "必修课管理",
+                subs: [
+                    {
+                        index: "/chooseCourse",
+                        title: "必修课管理",
+                    },
+                ],
+            },
+            {
+                icon: "el-icon-wallet",
+                index: "9",
+                title: "选修课管理",
+                subs: [
+                    {
+                        index: "/checkCourse",
+                        title: "选修课详情",
+                    },
+                    {
+                        index: "/statistical",
+                        title: "选修课统计",
+                    },
+                ],
+            },
+            {
+                icon: "el-icon-picture-outline",
+                index: "10",
+                title: "成绩管理",
+                subs: [
+                    {
+                        index: "/score",
+                        title: "成绩管理",
+                    },
+                ],
+            },
         ];
 
         const route = useRoute();

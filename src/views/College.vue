@@ -96,7 +96,6 @@
         model:false,
         title:'',
         search:'',
-        model:false,
         //表单对齐方式
         labelPosition: 'right',
         college_form:{},

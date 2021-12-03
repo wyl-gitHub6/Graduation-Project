@@ -200,6 +200,16 @@
           ],
           teacherEmail:[
             { required: true, message: '请输入邮箱', trigger: 'blur' },
+            {
+              validator:function (rule,value,callback) {
+                if ( /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/.test(value)==false){
+                  callback(new Error("邮箱格式错误"));
+                }else {
+                  callback();
+                }
+              },
+              trigger: "blur"
+            }
           ]
 
         },

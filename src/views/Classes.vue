@@ -5,7 +5,7 @@
         <el-button type="success" icon="el-icon-plus" @click="model = true,toAdd(),title='录入班级信息',btn=true" style="margin-left: 100px;">录入信息</el-button>
         <el-button type="danger" icon="el-icon-folder-delete" @click="deleteBatch" style="margin-left: 30px;">批量删除</el-button>
 
-        <el-input placeholder="输入班级或班级名称" v-model="search"
+        <el-input placeholder="输入班级编号或班级名称" v-model="search"
                   clearable style="width: 260px;margin-left: 150px;"></el-input>
         <el-button type="primary" @click="load" icon="el-icon-search" style="margin-left: 10px;">搜索</el-button>
         <br><br>

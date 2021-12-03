@@ -47,6 +47,12 @@
               <span v-if="scope.row.courseState == 1" style="color: #1abc9c">选修课</span>
             </template>
           </el-table-column>
+          <el-table-column label="限制人数" width="100px;">
+            <template #default="scope">
+              <span v-if="scope.row.courseState == 0" style="color: #20a0ff">无限制</span>
+              <span v-if="scope.row.courseState == 1" style="color: #1abc9c">{{scope.row.number}}</span>
+            </template>
+          </el-table-column>
           <el-table-column prop="courseCredit" label="学分"> </el-table-column>
           <el-table-column prop="startTime" label="开课日期"> </el-table-column>
           <el-table-column prop="endTime" label="结束日期"> </el-table-column>
@@ -107,6 +113,11 @@
               <el-form-item label="课程类别" prop="courseState">
                 <el-radio v-model="course_form.courseState" :label="0">必修课</el-radio>
                 <el-radio v-model="course_form.courseState" :label="1">选修课</el-radio>
+              </el-form-item>
+              <el-form-item v-if="course_form.courseState != 0" label="限制人数" prop="number" :rules="[
+                { required: true, message: '不能为空'},
+                { type: 'number', message: '必须为数字值'}]">
+                <el-input v-model.number="course_form.number"></el-input>
               </el-form-item>
               <el-form-item label="学分" prop="courseCredit">
                 <el-input-number
@@ -227,6 +238,9 @@
           courseDesc: [
             { required: true, message: '请输入课程描述', trigger: 'blur' },
           ],
+          number: [
+            { required: true, message: '请输入限制人数', trigger: 'blur' },
+          ],
           courseState: [
             { required: true, message: '请选择课程类别', trigger: 'blur' },
           ],
@@ -274,6 +288,7 @@
             this.course_form.courseImg = res.data.courseImg
             this.course_form.courseCredit = res.data.courseCredit
             this.course_form.courseState = res.data.courseState
+            this.course_form.number = res.data.number
             this.course_form.teacher = res.data.teacher
             this.course_form.courseDate[0] = res.data.startTime
             this.course_form.courseDate[1] = res.data.endTime
@@ -391,8 +406,7 @@
           if (valid) {
             this.model = false
             this.$refs.upload.clearFiles()
-            console.log(this.course_form)
-            /*request.put('/api/course/update',this.course_form).then(res=>{
+            request.put('/api/course/update',this.course_form).then(res=>{
               if(res.code == 0){
                 ElMessage.success({
                   message: res.message,
@@ -405,7 +419,7 @@
                   type: 'error'
                 });
               }
-            })*/
+            })
           } else {
             ElMessage.error({
               message: "请添加完整信息",

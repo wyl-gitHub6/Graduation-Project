@@ -3,7 +3,11 @@ import { createRouter, createWebHistory } from 'vue-router'
 const routes = [
   {
     path: '/',
-    redirect:'/home'
+    redirect:'/login'
+  },
+  {
+    path:'/login',
+    component:()=>import('../views/Login')
   },
   {
     path: '/home',
@@ -31,20 +35,20 @@ const routes = [
         component:()=>import('../views/User')
       },
       {
+        path:'/users',
+        name: "users",
+        meta: {
+          title: '管理员维护'
+        },
+        component:()=>import('../views/Users')
+      },
+      {
         path:'/statistical',
         name: "statistical",
         meta: {
-          title: '选课统计'
+          title: '选修课统计'
         },
         component:()=>import('../views/Statistical')
-      },
-      {
-        path:'/scoreStatistical',
-        name: "scoreStatistical",
-        meta: {
-          title: '成绩统计'
-        },
-        component:()=>import('../views/ScoreStatistical')
       },
       {
         path:'/course',
@@ -58,9 +62,17 @@ const routes = [
         path:'/chooseCourse',
         name: "chooseCourse",
         meta: {
-          title: '选课'
+          title: '必修课'
         },
         component:()=>import('../views/ChooseCourse')
+      },
+      {
+        path:'/checkCourse',
+        name: "checkCourse",
+        meta: {
+          title: '选修课'
+        },
+        component:()=>import('../views/CheckCourse')
       },
       {
         path:'/teacher',
@@ -117,6 +129,14 @@ const routes = [
           title: '分班管理'
         },
         component:()=>import('../views/DriverClasses')
+      },
+      {
+        path:'/score',
+        name: "score",
+        meta: {
+          title: '成绩管理'
+        },
+        component:()=>import('../views/Score')
       },
     ]
   },

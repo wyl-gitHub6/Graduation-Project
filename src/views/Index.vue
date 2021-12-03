@@ -1,54 +1,88 @@
 <template>
   <div class="common-layout">
     <!--第一部分-->
-    <div style="background-color: white;width: 100%;height: 70px;padding-top: 1%;margin-bottom: 30px">
-      <div style="display: flex;background-color: #f1f1f1;width: 95%;height: 50px;margin-left: 2%;">
-        <div style="width: 5px;height:50px;background-color: darkgreen"></div>
-        <div style="margin-top: 1%;padding-left: 10px">
-          欢迎<span style="color: #1abc9c">{{user}}</span>
-          当前时间:<span v-html="$options.filters.formatDate(date)"></span>
-        </div>
-      </div>
-    </div>
-    <!--第二部分-->
-    <div style="background-color: white;width: 100%;height: 250px">
-      <div style="font-size: 18px;padding-left:20px;padding-top: 15px">数据统计</div>
+    <el-card shadow="hover">
+      <div style="font-size: 18px;font-family: 'Adobe 黑体 Std R'">欢迎回来：{{user.userName}}</div>
       <el-divider></el-divider>
-      <div style="display: flex;">
-        <div class="box">
-          <div class="text">医生数</div>
-          <div class="text1">{{doctor}}</div>
-        </div>
-        <div class="box">
-          <div class="text">患者数</div>
-          <div class="text1">{{patient}}</div>
-        </div>
-        <div class="box">
-          <div class="text">护士数</div>
-          <div class="text1">{{nurse}}</div>
-        </div>
-        <div class="box">
-          <div class="text">就诊记录数</div>
-          <div class="text1">{{advice}}</div>
-        </div>
-        <div class="box">
-          <div class="text">项目检查记录数</div>
-          <div class="text1">{{setCheck}}</div>
-        </div>
-        <div class="box">
-          <div class="text">药品售出金额</div>
-          <div class="text1">{{price}}</div>
+      <div style="display: flex;margin-left: 3%;background-color: #f1f1f1;width: 96%;height: 80px;">
+        <div style="width: 5px;height:80px;background-color: darkgreen"></div>
+        <div style="margin-top: 25px;padding-left: 45px;font-family: 'Adobe 黑体 Std R'">
+          当前时间:<span v-html="$options.filters.formatDate(date)" style="margin-left: 15px;"></span>
         </div>
       </div>
-    </div>
-    <!--第三部分：开发团队-->
-    <div style="background-color: white;width: 100%;height: 200px;padding-top: 1%;margin-top: 30px">
-      <div style="font-size: 18px;padding-left:20px;padding-top: 15px">开发团队</div>
-      <el-table :data="tableData" border style="width: 95%;margin-left: 20px;margin-top: 20px">
-        <el-table-column prop="date" label="版权所有" width="675px"> </el-table-column>
-        <el-table-column prop="name" label="开发者" width="670px"> </el-table-column>
-      </el-table>
-    </div>
+    </el-card>
+
+    <!--第二部分-->
+    <el-card shadow="hover">
+        <div style="font-size: 18px;font-family: 'Adobe 黑体 Std R'">数据统计</div>
+        <el-divider></el-divider>
+        <div style="display: flex;">
+          <div class="box">
+            <div class="text">院系总数</div>
+            <div class="text1">{{college}}</div>
+          </div>
+          <div class="box">
+            <div class="text">专业总数</div>
+            <div class="text1">{{professional}}</div>
+          </div>
+          <div class="box">
+            <div class="text">年级总数</div>
+            <div class="text1">{{grade}}</div>
+          </div>
+          <div class="box">
+            <div class="text">班级总数</div>
+            <div class="text1">{{classes}}</div>
+          </div>
+          <div class="box">
+            <div class="text">教师人数</div>
+            <div class="text1">{{teacher}}</div>
+          </div>
+          <div class="box">
+            <div class="text">学生人数</div>
+            <div class="text1">{{student}}</div>
+          </div>
+        </div>
+    </el-card>
+
+    <el-card shadow="hover">
+          <div style="font-size: 18px;font-family: 'Adobe 黑体 Std R'">系统信息</div>
+          <el-divider></el-divider>
+        <el-row>
+          <el-col :span="8">
+              <el-descriptions :column="3" border>
+                <el-descriptions-item>
+                  <template #label>
+                    <i class="el-icon-loading"></i>
+                    <span style="font-family: 'Adobe 黑体 Std R'">开发技术</span>
+                  </template>
+                  <span style="font-family: 'Adobe 黑体 Std R'">SpringBoot + MybatisPlus</span>
+                </el-descriptions-item>
+              </el-descriptions>
+          </el-col>
+          <el-col :span="8">
+            <el-descriptions :column="3" border>
+              <el-descriptions-item>
+                <template #label>
+                  <i class="el-icon-loading"></i>
+                  <span style="font-family: 'Adobe 黑体 Std R'">前端技术</span>
+                </template>
+                <span style="font-family: 'Adobe 黑体 Std R'">Vue脚手架 + ElementUi开源框架</span>
+              </el-descriptions-item>
+            </el-descriptions>
+          </el-col>
+          <el-col :span="8">
+            <el-descriptions :column="3" border>
+              <el-descriptions-item>
+                <template #label>
+                  <i class="el-icon-loading"></i>
+                  <span style="font-family: 'Adobe 黑体 Std R'">数据库</span>
+                </template>
+                <span style="font-family: 'Adobe 黑体 Std R'">MySql数据库</span>
+              </el-descriptions-item>
+            </el-descriptions>
+          </el-col>
+        </el-row>
+      </el-card>
   </div>
 </template>
 
@@ -58,42 +92,36 @@
     name: "Index",
     data() {
       return {
-        tableData: [
-          {
-            date: '123',
-            name: '123456',
-          },
-        ],
-        doctor:'',
-        price:'',
-        patient:'',
+        college:'',
+        professional:'',
+        grade:'',
+        classes:'',
+        teacher:'',
+        student:'',
         date:new Date(),
-        nurse:'',
-        setCheck:'',
-        advice:'',
         user:JSON.parse(sessionStorage.getItem("user"))
       }
     },
     methods:{
       load(){
-       /* request.get('/api/doctor/findCount').then(res=>{
-          this.doctor = res.data
+        request.get('/api/college/findCount').then(res=>{
+          this.college = res.data
         })
-        request.get('/api/setprice/findSum').then(res=>{
-          this.price = res.data
+        request.get('/api/professional/findCount').then(res=>{
+          this.professional = res.data
         })
-        request.get('/api/patient/findCount').then(res=>{
-          this.patient = res.data
+        request.get('/api/grade/findCount').then(res=>{
+          this.grade = res.data
         })
-        request.get('/api/nurse/findCount').then(res=>{
-          this.nurse = res.data
+        request.get('/api/classes/findCount').then(res=>{
+          this.classes = res.data
         })
-        request.get('/api/setcheck/findCount').then(res=>{
-          this.setCheck = res.data
+        request.get('/api/teacher/findCount').then(res=>{
+          this.teacher = res.data
         })
-        request.get('/api/advice/findCount').then(res=>{
-          this.advice = res.data
-        })*/
+        request.get('/api/student/findCount').then(res=>{
+          this.student = res.data
+        })
       }
     },
     mounted() {
@@ -131,24 +159,33 @@
 </script>
 
 <style scoped>
+.el-card{
+  margin-left: 10px;
+  margin-top: 1%;
+  margin-bottom: 3%;
+}
 .box{
   background-color: #f1f1f1;
   width: 200px;
-  height: 120px;
-  margin-left: 30px;
+  height: 80px;
+  margin-left: 3%;
+  margin-right: 1%;
+  align-content: center;
 }
 .box>div{
   flex: 1;
 }
 .text{
-  margin-left: 20px;
-  margin-top: 20px;
+  margin-left: 65px;
+  margin-top: 5px;
   color: #666666;
+  font-family: 'Adobe 黑体 Std R'
 }
 .text1{
   color: forestgreen;
   font-size: 30px;
-  margin-left: 20px;
-  margin-top: 15px;
+  margin-left: 90px;
+  margin-top: 5px;
 }
+
 </style>

@@ -1,0 +1,225 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #686de0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+h1 {
+    font-weight: bold;
+    margin: 0;
+}
+
+.dowebok {
+    border-radius: 10px;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, .25), 0 10px 10px rgba(0, 0, 0, .22);
+    position: relative;
+    overflow: hidden;
+    width: 768px;
+    max-width: 100%;
+    min-height: 480px;
+	  margin-left: 600px;
+    margin-top: 200px;
+  background: rgba( 255, 255, 255, 0.25 );
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+  backdrop-filter: blur( 4px );
+  -webkit-backdrop-filter: blur( 4px );
+  border-radius: 25px;
+  border: 1px solid rgba( 255, 255, 255, 0.18 );
+}
+
+.form-container form {
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.form-container {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    transition: all .6s ease-in-out;
+}
+
+.sign-in-container {
+    left: 0;
+    width: 50%;
+    z-index: 2;
+}
+
+.sign-up-container {
+    left: 0;
+    width: 50%;
+    z-index: 1;
+    opacity: 0;
+}
+
+.overlay-container {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    transition: transform .6s ease-in-out;
+    z-index: 100;
+}
+
+.overlay {
+    background: #30336b;
+    color: #fff;
+    position: relative;
+    left: -100%;
+    height: 100%;
+    width: 200%;
+    transform: translateY(0);
+    transition: transform .6s ease-in-out;
+}
+
+.overlay-panel {
+    position: absolute;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 40px;
+    height: 100%;
+    width: 50%;
+    text-align: center;
+    transform: translateY(0);
+    transition: transform .6s ease-in-out;
+}
+
+.overlay-right {
+    right: 0;
+    transform: translateY(0);
+}
+
+.overlay-left {
+    transform: translateY(-20%);
+}
+
+/* Move signin to right */
+.dowebok.right-panel-active .sign-in-container {
+    transform: translateY(100%);
+}
+
+/* Move overlay to left */
+.dowebok.right-panel-active .overlay-container {
+    transform: translateX(-100%);
+}
+
+/* Bring signup over signin */
+.dowebok.right-panel-active .sign-up-container {
+    transform: translateX(100%);
+    opacity: 1;
+    z-index: 5;
+}
+
+/* Move overlay back to right */
+.dowebok.right-panel-active .overlay {
+    transform: translateX(50%);
+}
+
+/* Bring back the text to center */
+.dowebok.right-panel-active .overlay-left {
+    transform: translateY(0);
+}
+
+/* Same effect for right */
+.dowebok.right-panel-active .overlay-right {
+    transform: translateY(20%);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

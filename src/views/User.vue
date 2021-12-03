@@ -4,7 +4,7 @@
             <el-col :span="12">
                 <el-card shadow="hover">
                     <template #header>
-                        <div class="clearfix">
+                        <div class="clearFix">
                             <span>基础信息</span>
                         </div>
                     </template>
@@ -23,8 +23,8 @@
             <el-col :span="12">
                 <el-card shadow="hover">
                     <template #header>
-                        <div class="clearfix">
-                            <span>账户编辑</span>
+                        <div class="clearFix">
+                            <span>修改密码</span>
                         </div>
                     </template>
                     <el-form label-width="90px">
@@ -65,26 +65,70 @@
 import { reactive, ref } from "vue";
 import VueCropper from "vue-cropperjs";
 import "cropperjs/dist/cropper.css";
-import avatar from "../assets/img/img.jpg";
+import request from "../utils/request";
+import {ElMessage} from "element-plus";
 export default {
     name: "user",
     components: {
         VueCropper,
     },
     setup() {
-        const name = localStorage.getItem("ms_username");
-        const form = reactive({
+        const user = JSON.parse(sessionStorage.getItem("user"))
+        const name = JSON.parse(sessionStorage.getItem("user")).userName;
+        let form = reactive({
             old: "",
             new: "",
             desc: "不可能！我的代码怎么可能会有bug！",
         });
-        const onSubmit = () => {};
+        const onSubmit = () => {
+            if (form.new == null || form.new == '' || form.old == '' ||form.old == null){
+                ElMessage.error({
+                    message: '请保证完整性',
+                    type: 'error'
+                });
+                return
+            }
+            if (form.new == form.old){
+                ElMessage.error({
+                    message: '新密码不得与最近密码相同',
+                    type: 'error'
+                });
+                return
+            }
+            request.get('/api/user/updatePassword',{
+                params:{
+                    userId:user.userId,
+                    password:form.old
+                }
+            }).then(res=>{
+                if (res.code == -1){
+                    ElMessage.error({
+                        message: '旧密码错误',
+                        type: 'error'
+                    });
+                    return
+                }
 
-        const avatarImg = ref(avatar);
+                user.userPassword = form.new
+                request.put('api/user/update',user).then(res=>{
+                    if (res.code == 0){
+                        ElMessage.success({
+                            message: '密码修改成功!',
+                            type: 'success'
+                        });
+                        form.old = ''
+                        form.new = ''
+                    }
+                })
+            })
+        };
+
+        const avatarImg = ref(user.userImg);
         const imgSrc = ref("");
         const cropImg = ref("");
         const dialogVisible = ref(false);
         const cropper = ref(null);
+        let img = '';
 
         const showDialog = () => {
             dialogVisible.value = true;
@@ -93,6 +137,20 @@ export default {
 
         const setImage = (e) => {
             const file = e.target.files[0];
+
+            let param = new FormData()
+            param.append('file',file) // 通过append向form对象添加数据
+            param.append('chunk', '0') // 添加form表单中其他数据
+            //console.log(param.get('file')) // FormData私有类对象，访问不到，可以通过get判断值是否传进去
+            let config = {
+                headers: {'Content-Type': 'multipart/form-data'}
+            }
+            request.post('/api/uploadController/upload',param,config).then(res=>{
+                if (res.code == 0){
+                    img = res.message
+                }
+            })
+
             if (!file.type.includes("image/")) {
                 return;
             }
@@ -111,6 +169,16 @@ export default {
 
         const saveAvatar = () => {
             avatarImg.value = cropImg.value;
+            user.userImg = img
+            request.put('/api/user/update',user).then(res=>{
+                if (res.code == 0){
+                    ElMessage.success({
+                        message: '头像上传成功!',
+                        type: 'success'
+                    });
+                }
+            })
+
             dialogVisible.value = false;
         };
 
@@ -127,6 +195,8 @@ export default {
             setImage,
             cropImage,
             saveAvatar,
+            img,
+            user,
         };
     },
 };

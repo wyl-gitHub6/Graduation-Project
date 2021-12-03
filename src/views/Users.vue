@@ -2,34 +2,11 @@
   <div class="common-layout">
     <el-container>
       <el-main>
-        <el-button type="success" icon="el-icon-plus" @click="model = true,student_form={studentAge:''},title='录入学生信息',btn=true" style="margin-left: 100px;">录入信息</el-button>
+        <el-button type="success" icon="el-icon-plus" @click="model = true,user_form={userAge:''},title='录入管理员信息',btn=true" style="margin-left: 100px;">录入信息</el-button>
         <el-button type="danger" icon="el-icon-folder-delete" @click="deleteBatch" style="margin-left: 30px;">批量删除</el-button>
 
-        <!--导入-->
-        <el-upload
-                style="margin-left:30px;width:230px;display: inline-block"
-                class="upload-demo"
-                action="/api/student/uploadXls"
-                :on-preview="handlePreview"
-                :before-remove="beforeRemove"
-                :on-success="upload_success"
-                :on-error="upload_error"
-                multiple
-                :limit="1"
-                :on-exceed="handleExceed"
-                accept=".xls,.xlsx"
-        >
-          <el-tooltip
-                  class="item"
-                  effect="dark"
-                  content="只能上传 xls/xlsx 文件，且不超过 500kb"
-                  placement="top-start"
-          >
-          <el-button type="primary" icon="el-icon-upload">点击导入</el-button>
-          </el-tooltip>
-        </el-upload>
 
-        <el-input placeholder="输入学生学号或学生姓名" v-model="search"
+        <el-input placeholder="输入管理员编号或管理员姓名" v-model="search"
                   clearable style="width: 260px;margin-left: 150px;"></el-input>
         <el-button type="primary" @click="load" icon="el-icon-search" style="margin-left: 10px;">搜索</el-button>
         <br><br>
@@ -47,29 +24,23 @@
         >
           <el-table-column type="selection" width="55"> </el-table-column>
           <el-table-column prop="id" label="Id" v-if="isShow"></el-table-column>
-          <el-table-column prop="studentNum" label="学号"></el-table-column>
-          <el-table-column prop="studentName" label="姓名"> </el-table-column>
-          <el-table-column prop="studentAge" label="年龄"> </el-table-column>
-          <el-table-column prop="studentNational" label="民族"> </el-table-column>
-          <el-table-column prop="studentSex" label="性别">
+          <el-table-column prop="userNum" label="管理员编号"></el-table-column>
+          <el-table-column prop="userName" label="姓名"> </el-table-column>
+          <el-table-column prop="userAge" label="年龄"> </el-table-column>
+          <el-table-column prop="userNational" label="民族"> </el-table-column>
+          <el-table-column prop="userSex" label="性别">
             <template #default="scope">
-              <span v-if="scope.row.studentSex == 0" style="color: #20a0ff">男</span>
-              <span v-if="scope.row.studentSex == 1" style="color: #1abc9c">女</span>
+              <span v-if="scope.row.userSex == 0" style="color: #20a0ff">男</span>
+              <span v-if="scope.row.userSex == 1" style="color: #1abc9c">女</span>
             </template>
           </el-table-column>
-          <el-table-column prop="studentCard" label="身份证号" width="170px;"> </el-table-column>
-          <el-table-column prop="studentEmail" label="邮箱"> </el-table-column>
-          <el-table-column prop="studentPhone" label="手机号" > </el-table-column>
-          <el-table-column prop="classes.classesName" label="所在班级">
-            <template #default="scope">
-              <span v-if="scope.row.classes.classesName == null" style="color: #20a0ff">未分班</span>
-              <span v-if="scope.row.classes.classesName != null" style="color: #1abc9c">{{scope.row.classes.classesName}}</span>
-            </template>
-          </el-table-column>
+          <el-table-column prop="userCard" label="身份证号"> </el-table-column>
+          <el-table-column prop="userEmail" label="邮箱"> </el-table-column>
+          <el-table-column prop="userPhone" label="手机号" > </el-table-column>
           <el-table-column label="操作" width="200">
             <template #default="scope">
-              <el-button type="primary" icon="el-icon-edit"  @click="model=true,title='编辑学生信息',btn=false,handleEdit(scope.$index, scope.row)"></el-button>
-              <el-button type="danger" icon="el-icon-delete" @click="handleDelete(scope.$index, scope.row)"></el-button>
+              <el-button type="primary" icon="el-icon-edit"  @click="model=true,title='编辑管理员信息',btn=false,handleEdit(scope.$index, scope.row)"></el-button>
+              <el-button type="danger" icon="el-icon-delete" v-if="scope.row.userId != user.userId" @click="handleDelete(scope.$index, scope.row)"></el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -90,39 +61,34 @@
         <!--弹框开始-->
         <div>
           <el-dialog :title="title" v-model="model" width="25%" center>
-            <el-form :label-position="labelPosition" label-width="80px" :model="student_form"
+            <el-form :label-position="labelPosition" label-width="80px" :model="user_form"
                      :rules="rules"
                      ref="ruleForm">
 
-              <el-input v-model="student_form.studentId" v-if="isShow"></el-input>
-              <el-form-item label="学号" prop="studentNum" :rules="[
+              <el-input v-model="user_form.userId" v-if="isShow"></el-input>
+              <el-form-item label="姓名" prop="userName">
+                <el-input v-model="user_form.userName"></el-input>
+              </el-form-item>
+              <el-form-item label="年龄" prop="userAge" :rules="[
                 { required: true, message: '不能为空'},
-                { type: 'number', message: '学号为数字值'}]">
-                <el-input v-model.number="student_form.studentNum"></el-input>
+                { type: 'number', message: '年龄必须为数字值'}]">
+                <el-input v-model.number="user_form.userAge" autocomplete="off"></el-input>
               </el-form-item>
-              <el-form-item label="姓名" prop="studentName">
-                <el-input v-model="student_form.studentName"></el-input>
+              <el-form-item label="性别" prop="userSex">
+                <el-radio v-model="user_form.userSex" :label="0">男</el-radio>
+                <el-radio v-model="user_form.userSex" :label="1">女</el-radio>
               </el-form-item>
-              <el-form-item label="年龄" prop="studentAge" :rules="[
-                { required: true, message: '不能为空'},
-                { type: 'number', message: '年龄为数字值'}]">
-                <el-input v-model.number="student_form.studentAge" autocomplete="off"></el-input>
+              <el-form-item label="民族" prop="userNational">
+                <el-input v-model="user_form.userNational"></el-input>
               </el-form-item>
-              <el-form-item label="性别" prop="studentSex">
-                <el-radio v-model="student_form.studentSex" :label="0">男</el-radio>
-                <el-radio v-model="student_form.studentSex" :label="1">女</el-radio>
+              <el-form-item label="身份证号" prop="userCard">
+                <el-input v-model="user_form.userCard"></el-input>
               </el-form-item>
-              <el-form-item label="民族" prop="studentNational">
-                <el-input v-model="student_form.studentNational"></el-input>
+              <el-form-item label="联系电话" prop="userPhone">
+                <el-input v-model="user_form.userPhone"></el-input>
               </el-form-item>
-              <el-form-item label="身份证号" prop="studentCard">
-                <el-input v-model="student_form.studentCard"></el-input>
-              </el-form-item>
-              <el-form-item label="联系电话" prop="studentPhone">
-                <el-input v-model="student_form.studentPhone"></el-input>
-              </el-form-item>
-              <el-form-item label="邮箱" prop="studentEmail">
-                <el-input v-model="student_form.studentEmail"></el-input>
+              <el-form-item label="邮箱" prop="userEmail">
+                <el-input v-model="user_form.userEmail"></el-input>
               </el-form-item>
 
             </el-form>
@@ -148,7 +114,7 @@
   import { ElMessage } from 'element-plus';
 
   export default {
-    name: "Student",
+    name: "Users",
     components:{
       edit:Edit
     },
@@ -166,18 +132,19 @@
         model:false,
         //表单对齐方式
         labelPosition: 'right',
-        student_form:{studentAge:''},
+        user_form:{userAge:''},
         isShow:false,
         btn:false,
+        user:JSON.parse(sessionStorage.getItem("user")),
 
         rules:{
-          studentName: [
+          userName: [
             { required: true, message: '请输入姓名', trigger: 'blur' },
           ],
-          studentSex:[
+          userSex:[
             { required: true, message: '请选择性别', trigger: 'blur' },
           ],
-          studentCard: [
+          userCard: [
             { required: true, message: '请按照身份证格式输入', trigger: 'blur' },
             {
               validator:function (rule,value,callback) {
@@ -190,7 +157,7 @@
               trigger: "blur"
             }
           ],
-          studentPhone: [
+          userPhone: [
             { required: true,
               message: '请输入联系方式',
               trigger: 'blur'
@@ -206,10 +173,10 @@
               trigger: "blur"
             }
           ],
-          studentNational:[
+          userNational:[
             { required: true, message: '请输入民族', trigger: 'blur' },
           ],
-          studentEmail:[
+          userEmail:[
             { required: true, message: '请输入邮箱', trigger: 'blur' },
             {
               validator:function (rule,value,callback) {
@@ -241,13 +208,13 @@
         this.load()
       },
       handleEdit(index, row) {
-        request.get('/api/student/findById',{
+        request.get('/api/user/findById',{
           params:{
-            studentId:row.studentId
+            userId:row.userId
           }
         }).then(res=>{
           if (res.code == 0){
-            this.student_form = res.data
+            this.user_form = res.data
           }else{
             console.log(res.message)
           }
@@ -259,9 +226,9 @@
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          request.delete('/api/student/deleteById',{
+          request.delete('/api/user/deleteById',{
             params:{
-              studentId:row.studentId
+              userId:row.userId
             }
           }).then(res=>{
             if(res.code == 0){
@@ -290,9 +257,9 @@
           return false;
         }else{
           for(let i = 0;i < this.multipleSelection.length;i++){
-            this.delIdr[i] = this.multipleSelection[i].studentId
+            this.delIdr[i] = this.multipleSelection[i].userId
           }
-          request.delete('/api/student/deleteBatch',{
+          request.delete('/api/user/deleteBatch',{
             params:{
               'ids':this.delIdr.toString()
             }
@@ -316,7 +283,7 @@
         this.$refs[formName].validate((valid) => {
           if (valid) {
             this.model = false;
-            request.post('/api/student/insert',this.student_form).then(res=>{
+            request.post('/api/user/insert',this.user_form).then(res=>{
               if (res.code == 0){
                 ElMessage.success({
                   message: res.message,
@@ -343,7 +310,7 @@
         this.$refs[formName].validate((valid) => {
           if (valid) {
             this.model = false
-            request.put('/api/student/update',this.student_form).then(res=>{
+            request.put('/api/user/update',this.user_form).then(res=>{
               if(res.code == 0){
                 ElMessage.success({
                   message: res.message,
@@ -367,12 +334,12 @@
         })
       },
       load(){
-        request.get('api/student/findList',{
+        request.get('api/user/findList',{
           params:{
             currentPage:this.currentPage,
             pageSize:this.pageSize,
-            studentNum:this.search,
-            studentName:this.search
+            userName:this.search,
+            userNum:this.search
           }
         }).then(res=>{
           this.tableData = res.data.list
@@ -382,41 +349,6 @@
       //重置
       resetForm(formName) {
         this.$refs[formName].resetFields()
-      },
-      /*上传*/
-      /*点击上传文件*/
-      handlePreview(file) {
-        ElMessage.success({
-          message: file.name,
-          type: 'success'
-        });
-      },
-      handleExceed(files, fileList) {
-        this.$message.warning(
-                `当前限制选择 1 个文件，本次选择了 ${files.length} 个文件，共选择了 ${
-                        files.length + fileList.length
-                } 个文件`
-        )
-      },
-      /*移除*/
-      beforeRemove(file, fileList) {
-        return this.$confirm(`确定移除 ${file.name}？`)
-      },
-      /*上传成功*/
-      upload_success(response, file, fileList){
-        ElMessage.success({
-          message: response.message,
-          type: 'success'
-        });
-        this.load()
-      },
-      /*上传失败*/
-      upload_error(response, file, fileList){
-        ElMessage.error({
-          message: "上传失败",
-          type: 'error'
-        });
-        this.load()
       },
     },
     created() {

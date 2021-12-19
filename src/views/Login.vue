@@ -9,8 +9,8 @@
                 class="demo-ruleForm"
         >
           <h2 style="margin-bottom: 20px;margin-left: 20px;color: #20a0ff">重置密码</h2>
-          <el-form-item label="用户名" prop="name">
-            <el-input v-model="restForm.name"></el-input>
+          <el-form-item label="用户名" prop="username">
+            <el-input v-model="restForm.username"></el-input>
           </el-form-item>
           <el-form-item label="邮箱" prop="email">
             <el-input v-model="restForm.email" style="width: 135px;"></el-input>
@@ -34,8 +34,8 @@
                 class="demo-ruleForm"
         >
           <h2 style="margin-bottom: 20px;margin-left: 20px;color: #20a0ff">用户登录</h2>
-          <el-form-item label="用户名" prop="name">
-            <el-input v-model="ruleForm.name"></el-input>
+          <el-form-item label="用户名" prop="username">
+            <el-input v-model="ruleForm.username"></el-input>
           </el-form-item>
           <el-form-item label="密码" prop="password">
             <el-input type="password" v-model="ruleForm.password"></el-input>
@@ -79,7 +79,6 @@
   import '../assets/out/css/style.css'
   import request from "../utils/request";
   import {ElMessage} from "element-plus";
-  import router from "../router";
 
   export default {
     name: "Login",
@@ -88,12 +87,12 @@
         signUpButton:'',
         signInButton:'',
         container:'',
-        ruleForm:{},
+        ruleForm:{username:'wyl',password:'123'},
         restForm:{},
         emailCode:'',
         user:{userPassword:''},
         rules: {
-          name: [
+          username: [
             { required: true, message: '请输入管理员编号', trigger: 'change' },
           ],
           password: [
@@ -125,12 +124,7 @@
       login(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            request.get('/api/user/login',{
-              params:{
-                userNum:this.ruleForm.name,
-                password:this.ruleForm.password
-              }
-            }).then(res=>{
+            request.post('/api/login',this.ruleForm).then(res=>{
               if (res.code == 0) {
                 ElMessage.success({
                   message: res.message,
@@ -182,7 +176,7 @@
         })
       },
       sendEmail(){
-        if (this.restForm.name == null || this.restForm.name == ""){
+        if (this.restForm.username == null || this.restForm.username == ""){
           ElMessage.error({
             message: '请输入管理员编号',
             type: 'error'
@@ -198,7 +192,7 @@
         }
         request.get('/api/user/sendEmail',{
           params:{
-            userNum:this.restForm.name,
+            userNum:this.restForm.username,
             emailAddress:this.restForm.email
           }
         }).then(res=>{

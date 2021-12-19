@@ -175,6 +175,7 @@
           if (valid) {
             this.model = false
             request.put('/api/score/update',this.score).then(res=>{
+              console.log(res)
               if(res.code == 0){
                 ElMessage.success({
                   message: res.message,

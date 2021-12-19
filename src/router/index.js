@@ -16,13 +16,14 @@ const routes = [
     children:[
       {
         path:'/home',
-        redirect:'/index'
+        redirect:'/index',
       },
       {
         path:'/index',
         name: "index",
         meta: {
-          title: '首页'
+          title: '首页',
+          requireAuth: true
         },
         component:()=>import('../views/Index')
       },
@@ -30,7 +31,8 @@ const routes = [
         path:'/user',
         name: "user",
         meta: {
-          title: '个人信息'
+          title: '个人信息',
+          requireAuth: true
         },
         component:()=>import('../views/User')
       },
@@ -38,7 +40,8 @@ const routes = [
         path:'/users',
         name: "users",
         meta: {
-          title: '管理员维护'
+          title: '管理员维护',
+          requireAuth: true
         },
         component:()=>import('../views/Users')
       },
@@ -46,7 +49,8 @@ const routes = [
         path:'/statistical',
         name: "statistical",
         meta: {
-          title: '选修课统计'
+          title: '选修课统计',
+          requireAuth: true
         },
         component:()=>import('../views/Statistical')
       },
@@ -54,7 +58,8 @@ const routes = [
         path:'/course',
         name: "course",
         meta: {
-          title: '课程管理'
+          title: '课程管理',
+          requireAuth: true
         },
         component:()=>import('../views/Course')
       },
@@ -62,7 +67,8 @@ const routes = [
         path:'/chooseCourse',
         name: "chooseCourse",
         meta: {
-          title: '必修课'
+          title: '必修课',
+          requireAuth: true
         },
         component:()=>import('../views/ChooseCourse')
       },
@@ -70,7 +76,8 @@ const routes = [
         path:'/checkCourse',
         name: "checkCourse",
         meta: {
-          title: '选修课'
+          title: '选修课',
+          requireAuth: true
         },
         component:()=>import('../views/CheckCourse')
       },
@@ -78,7 +85,8 @@ const routes = [
         path:'/teacher',
         name: "teacher",
         meta: {
-          title: '教师管理'
+          title: '教师管理',
+          requireAuth: true
         },
         component:()=>import('../views/Teacher')
       },
@@ -86,7 +94,8 @@ const routes = [
         path:'/college',
         name: "college",
         meta: {
-          title: '院系管理'
+          title: '院系管理',
+          requireAuth: true
         },
         component:()=>import('../views/College')
       },
@@ -94,7 +103,8 @@ const routes = [
         path:'/professional',
         name: "professional",
         meta: {
-          title: '专业管理'
+          title: '专业管理',
+          requireAuth: true
         },
         component:()=>import('../views/Professional')
       },
@@ -102,7 +112,8 @@ const routes = [
         path:'/grade',
         name: "grade",
         meta: {
-          title: '年级管理'
+          title: '年级管理',
+          requireAuth: true
         },
         component:()=>import('../views/Grade')
       },
@@ -110,7 +121,8 @@ const routes = [
         path:'/classes',
         name: "classes",
         meta: {
-          title: '班级管理'
+          title: '班级管理',
+          requireAuth: true
         },
         component:()=>import('../views/Classes')
       },
@@ -118,7 +130,8 @@ const routes = [
         path:'/student',
         name: "student",
         meta: {
-          title: '学生管理'
+          title: '学生管理',
+          requireAuth: true
         },
         component:()=>import('../views/Student')
       },
@@ -126,7 +139,8 @@ const routes = [
         path:'/driverClasses',
         name: "driverClasses",
         meta: {
-          title: '分班管理'
+          title: '分班管理',
+          requireAuth: true
         },
         component:()=>import('../views/DriverClasses')
       },
@@ -134,7 +148,8 @@ const routes = [
         path:'/score',
         name: "score",
         meta: {
-          title: '成绩管理'
+          title: '成绩管理',
+          requireAuth: true
         },
         component:()=>import('../views/Score')
       },
@@ -145,6 +160,21 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(res => res.meta.requireAuth)) {// 判断是否需要登录权限
+    if (sessionStorage.getItem("user")) {// 判断是否登录
+      next()
+    } else {// 没登录则跳转到登录界面
+      next({
+        path: '/login',
+        query: {redirect: to.fullPath}
+      })
+    }
+  } else {
+    next()
+  }
 })
 
 export default router

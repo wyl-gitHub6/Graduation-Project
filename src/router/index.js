@@ -153,6 +153,15 @@ const routes = [
         },
         component:()=>import('../views/Score')
       },
+      {
+        path:'/quartz',
+        name: "quartz",
+        meta: {
+          title: '定时任务',
+          requireAuth: true
+        },
+        component:()=>import('../views/Quartz')
+      },
     ]
   },
 ]

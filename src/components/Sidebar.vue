@@ -1,7 +1,5 @@
 <template>
     <div class="sidebar">
-
-
         <el-menu class="sidebar-el-menu" :default-active="onRoutes" :collapse="collapse" background-color="#40407a"
                  text-color="#ffffff" active-text-color="#1e90ff" unique-opened router>
             <template v-for="item in items">
@@ -164,6 +162,17 @@ export default {
                     {
                         index: "/score",
                         title: "成绩管理",
+                    },
+                ],
+            },
+            {
+                icon: "el-icon-alarm-clock",
+                index: "11",
+                title: "定时任务",
+                subs: [
+                    {
+                        index: "/quartz",
+                        title: "定时任务",
                     },
                 ],
             },

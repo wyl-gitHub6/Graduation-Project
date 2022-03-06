@@ -162,6 +162,14 @@ const routes = [
         },
         component:()=>import('../views/Quartz')
       },
+      {
+        path:'/captcha',
+        name: "captcha",
+        meta: {
+          title: '定时任务',
+        },
+        component:()=>import('../views/Captcha')
+      },
     ]
   },
 ]

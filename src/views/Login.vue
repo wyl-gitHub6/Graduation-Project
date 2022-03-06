@@ -5,23 +5,23 @@
                 :model="restForm"
                 :rules="rules"
                 ref="restForm"
-                label-width="65px"
+                label-width="0px"
                 class="demo-ruleForm"
         >
           <h2 style="margin-bottom: 20px;margin-left: 20px;color: #20a0ff">重置密码</h2>
-          <el-form-item label="用户名" prop="username">
-            <el-input v-model="restForm.username"></el-input>
+          <el-form-item prop="username">
+            <el-input v-model="restForm.username" placeholder="用户名"></el-input>
           </el-form-item>
-          <el-form-item label="邮箱" prop="email">
-            <el-input v-model="restForm.email" style="width: 135px;"></el-input>
-            <el-button type="primary" style="margin-left: 10px;" @click="sendEmail()">发送</el-button>
+          <el-form-item prop="email">
+            <el-input v-model="restForm.email" style="width: 220px;" placeholder="邮箱"></el-input>
+            <el-button style="margin-left: 10px;" @click="sendEmail()">发送</el-button>
           </el-form-item>
-          <el-form-item label="验证码" prop="code">
-            <el-input v-model="restForm.code" style="width: 135px;"></el-input>
-            <el-button style="margin-left: 10px;" @click="resetform('restForm')">重置</el-button>
+          <el-form-item prop="code">
+            <el-input v-model="restForm.code" style="width: 220px;" placeholder="验证码"></el-input>
+            <el-button style="margin-left: 10px;" @click="resetForm('restForm')">重置</el-button>
           </el-form-item>
           <el-form-item>
-            <el-button style="margin-left: -30px" type="primary" @click="rest('restForm')">重置密码</el-button>
+            <el-button style="width: 300px;" type="primary" @click="rest('restForm')">重置密码</el-button>
           </el-form-item>
         </el-form>
       </div>
@@ -30,19 +30,21 @@
                 :model="ruleForm"
                 :rules="rules"
                 ref="ruleForm"
-                label-width="65px"
+                label-width="0px"
                 class="demo-ruleForm"
         >
           <h2 style="margin-bottom: 20px;margin-left: 20px;color: #20a0ff">用户登录</h2>
-          <el-form-item label="用户名" prop="username">
-            <el-input v-model="ruleForm.username"></el-input>
+          <el-form-item prop="username">
+            <el-input v-model="ruleForm.username" placeholder="用户名"></el-input>
           </el-form-item>
-          <el-form-item label="密码" prop="password">
-            <el-input type="password" v-model="ruleForm.password"></el-input>
+          <el-form-item prop="password">
+            <el-input type="password" v-model="ruleForm.password" placeholder="密码"></el-input>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="login('ruleForm')">登录</el-button>
-            <el-button @click="resetForm('ruleForm')">重置</el-button>
+            <captcha @captchaSuccess="success" style="width: 300px;"></captcha>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="login('ruleForm')" style="width: 300px;">登录</el-button>
           </el-form-item>
         </el-form>
       </div>
@@ -79,17 +81,20 @@
   import '../assets/out/css/style.css'
   import request from "../utils/request";
   import {ElMessage} from "element-plus";
+  import Captcha from "./Captcha";
 
   export default {
     name: "Login",
+    components: {Captcha},
     data(){
       return {
         signUpButton:'',
         signInButton:'',
         container:'',
-        ruleForm:{username:'wyl',password:'123'},
+        ruleForm:{},
         restForm:{},
         emailCode:'',
+        status:false,
         user:{userPassword:''},
         rules: {
           username: [
@@ -124,8 +129,20 @@
       login(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            request.post('/api/login',this.ruleForm).then(res=>{
-              if (res.code == 0) {
+            if (!this.status){
+              ElMessage.error({
+                message: '请按住滑块，拖动到最右边~',
+                type: 'error'
+              });
+              return
+            }
+            request.get('/api/user/login',{
+              params:{
+                userNum:this.ruleForm.username,
+                password:this.ruleForm.password
+              }
+            }).then(res=>{
+              if (res.code === 0) {
                 ElMessage.success({
                   message: res.message,
                   type: 'success'
@@ -145,16 +162,16 @@
           }
         })
       },
-      resetForm(formName) {
-        this.$refs[formName].resetFields()
+      success(e){
+        this.status = e;
       },
-      resetform(formName) {
+      resetForm(formName) {
         this.$refs[formName].resetFields()
       },
       rest(formName){
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            if (this.restForm.code != this.emailCode){
+            if (this.restForm.code !== this.emailCode){
               ElMessage.error({
                 message: '验证码错误！',
                 type: 'error'
@@ -163,11 +180,12 @@
             }
             this.user.userPassword = '123'
             request.put('/api/user/update',this.user).then(res=>{
-              if (res.code == 0){
+              if (res.code === 0){
                 ElMessage.success({
                   message: '密码重置成功',
                   type: 'success'
                 });
+                this.resetForm('restForm')
               }
             })
           } else {
@@ -176,14 +194,14 @@
         })
       },
       sendEmail(){
-        if (this.restForm.username == null || this.restForm.username == ""){
+        if (this.restForm.username == null || this.restForm.username === ""){
           ElMessage.error({
             message: '请输入管理员编号',
             type: 'error'
           });
           return
         }
-        if (this.restForm.email == null || this.restForm.email == ""){
+        if (this.restForm.email == null || this.restForm.email === ""){
           ElMessage.error({
             message: '请输入绑定邮箱',
             type: 'error'
@@ -196,7 +214,7 @@
             emailAddress:this.restForm.email
           }
         }).then(res=>{
-          if (res.code == 0){
+          if (res.code === 0){
             ElMessage.success({
               message: res.message,
               type: 'success'
@@ -217,5 +235,7 @@
 </script>
 
 <style scoped>
-
+.el-input{
+  width: 300px;
+}
 </style>

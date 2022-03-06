@@ -55,7 +55,7 @@
                     <i class="el-icon-loading"></i>
                     <span style="font-family: 'Adobe 黑体 Std R'">开发技术</span>
                   </template>
-                  <span style="font-family: 'Adobe 黑体 Std R'">SpringBoot + MybatisPlus</span>
+                  <span style="font-family: 'Adobe 黑体 Std R'">SpringBoot + Mybatis</span>
                 </el-descriptions-item>
               </el-descriptions>
           </el-col>

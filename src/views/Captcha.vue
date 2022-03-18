@@ -100,7 +100,6 @@
     height: 45px;
     border-radius: 1px;
     z-index: 9999;
-    /*no*/
   }
 
   .draggable_bg {
@@ -115,7 +114,6 @@
     position: absolute;
     left: 0;
     width: 60px;
-    /*no*/
     height: 100%;
     color: #919191;
     background-color: #fff;

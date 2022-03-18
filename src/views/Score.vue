@@ -17,6 +17,7 @@
                 :default-sort = "{prop: 'date', order: 'descending'}"
         >
           <el-table-column prop="id" label="Id" v-if="isShow"></el-table-column>
+          <el-table-column prop="student.studentNum" label="学生学号"></el-table-column>
           <el-table-column prop="student.studentName" label="学生姓名"></el-table-column>
           <el-table-column prop="course.courseName" label="课程名称"></el-table-column>
           <el-table-column prop="usualGrade" label="平时成绩">

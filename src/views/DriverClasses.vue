@@ -207,7 +207,7 @@
                 </el-table-column>
                 <el-table-column label="姓名">
                   <template #default="scope">
-                    <el-popover effect="light" trigger="hover" placement="top">
+                    <el-popover effect="light" trigger="hover" placement="top" width="200px">
                       <template #default>
                         <p>年龄: {{ scope.row.studentAge }}</p>
                         <p>民族: {{ scope.row.studentNational }}</p>

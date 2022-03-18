@@ -117,19 +117,19 @@
       /*分页*/
       handleSizeChange(val) {
         this.pageSize=val
-        this.courseLoad()
+        this.load()
       },
       handleCurrentChange(val) {
         this.currentPage=val
-        this.courseLoad()
+        this.load()
       },
       handleSizeChangeStudent(val) {
-        this.pageSize=val
-        this.courseLoad()
+        this.pageSizeStudent=val
+        this.findStudents(this.courseId,this.courseName)
       },
       handleCurrentChangeStudent(val) {
-        this.currentPage=val
-        this.courseLoad()
+        this.currentPageStudent=val
+        this.findStudents(this.courseId,this.courseName)
       },
       /*停课*/
       deleteCheck(){

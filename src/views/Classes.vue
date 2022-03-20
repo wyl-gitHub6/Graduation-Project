@@ -23,7 +23,8 @@
         >
           <el-table-column type="selection" width="55"> </el-table-column>
           <el-table-column prop="id" label="Id" v-if="isShow"></el-table-column>
-          <el-table-column prop="classesNum" label="班级编号"></el-table-column>
+          <el-table-column prop="classesNum" label="班级编号" width="150px;"></el-table-column>
+          <el-table-column prop="classesCode" label="班级编码"></el-table-column>
           <el-table-column prop="classesName" label="班级名称"> </el-table-column>
           <el-table-column prop="classesAllNumber" label="人数限额"> </el-table-column>
           <el-table-column prop="classesNumber" label="当前人数">

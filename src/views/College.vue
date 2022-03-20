@@ -24,6 +24,7 @@
           <el-table-column type="selection" width="55"> </el-table-column>
           <el-table-column prop="id" label="Id" v-if="isShow"></el-table-column>
           <el-table-column prop="collegeNum" label="院系编号"></el-table-column>
+          <el-table-column prop="collegeCode" label="院系编码"></el-table-column>
           <el-table-column prop="collegeName" label="院系名称"> </el-table-column>
           <el-table-column label="操作" width="200">
             <template #default="scope">

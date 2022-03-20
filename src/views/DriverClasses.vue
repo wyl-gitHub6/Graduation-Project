@@ -198,19 +198,11 @@
               >
                 <el-table-column type="selection" width="55"> </el-table-column>
                 <el-table-column prop="id" label="Id" v-if="isShow"></el-table-column>
-                <el-table-column prop="studentNum" label="学号">
-                  <template #default="scope">
-                    <div class="name-wrapper">
-                      <el-tag size="medium">{{ scope.row.studentNum }}</el-tag>
-                    </div>
-                  </template>
-                </el-table-column>
                 <el-table-column label="姓名">
                   <template #default="scope">
                     <el-popover effect="light" trigger="hover" placement="top" width="200px">
                       <template #default>
                         <p>年龄: {{ scope.row.studentAge }}</p>
-                        <p>民族: {{ scope.row.studentNational }}</p>
                         <p>邮箱: {{ scope.row.studentEmail }}</p>
                         <p>手机号: {{ scope.row.studentPhone }}</p>
                       </template>
@@ -220,6 +212,13 @@
                         </div>
                       </template>
                     </el-popover>
+                  </template>
+                </el-table-column>
+                <el-table-column prop="studentNational" label="民族">
+                  <template #default="scope">
+                    <div class="name-wrapper">
+                      <el-tag size="medium">{{ scope.row.studentNational }}</el-tag>
+                    </div>
                   </template>
                 </el-table-column>
                 <el-table-column prop="studentSex" label="性别">

@@ -15,7 +15,7 @@
                 :on-success="upload_success"
                 :on-error="upload_error"
                 multiple
-                :limit="1"
+                :limit="2"
                 :on-exceed="handleExceed"
                 accept=".xls,.xlsx"
         >
@@ -47,7 +47,12 @@
         >
           <el-table-column type="selection" width="55"> </el-table-column>
           <el-table-column prop="id" label="Id" v-if="isShow"></el-table-column>
-          <el-table-column prop="studentNum" label="学号"></el-table-column>
+          <el-table-column prop="studentNum" label="学号">
+            <template #default="scope">
+              <span v-if="scope.row.classes.classesName == null" style="color: #20a0ff">未分班</span>
+              <span v-if="scope.row.classes.classesName != null" style="color: #1abc9c">{{scope.row.studentNum}}</span>
+            </template>
+          </el-table-column>
           <el-table-column prop="studentName" label="姓名"> </el-table-column>
           <el-table-column prop="studentAge" label="年龄"> </el-table-column>
           <el-table-column prop="studentNational" label="民族"> </el-table-column>
@@ -95,11 +100,6 @@
                      ref="ruleForm">
 
               <el-input v-model="student_form.studentId" v-if="isShow"></el-input>
-              <el-form-item label="学号" prop="studentNum" :rules="[
-                { required: true, message: '不能为空'},
-                { type: 'number', message: '学号为数字值'}]">
-                <el-input v-model.number="student_form.studentNum"></el-input>
-              </el-form-item>
               <el-form-item label="姓名" prop="studentName">
                 <el-input v-model="student_form.studentName"></el-input>
               </el-form-item>
@@ -393,14 +393,14 @@
       },
       handleExceed(files, fileList) {
         this.$message.warning(
-                `当前限制选择 1 个文件，本次选择了 ${files.length} 个文件，共选择了 ${
+                `当前限制选择 2 个文件，本次选择了 ${files.length} 个文件，共选择了 ${
                         files.length + fileList.length
                 } 个文件`
         )
       },
       /*移除*/
       beforeRemove(file, fileList) {
-        return this.$confirm(`确定移除 ${file.name}？`)
+        return true;
       },
       /*上传成功*/
       upload_success(response, file, fileList){

@@ -1,3 +1,11 @@
+<!--
+ * @Description: 排课
+ * @Author: Wangyl
+ * @Date: 2021-10-06 16:54:37
+ * @LastEditors: Wangyl
+ * @LastEditTime: 2022-03-28 21:17:43
+-->
+
 <template>
   <div class="common-layout">
     <el-container>
@@ -21,10 +29,10 @@
             >
               <el-descriptions-item v-for="item in courseList">
                 <template #label>
-                  <el-tag size="50px;" style="margin-left: 5px;margin-bottom: 5px;"><i class="el-icon-loading"></i>课程名称</el-tag>
-                  <el-tag size="50px;" style="margin-left: 5px;margin-bottom: 5px;"><i class="el-icon-loading"></i>课程编号</el-tag>
-                  <el-tag size="50px;" style="margin-left: 5px;margin-bottom: 5px;"><i class="el-icon-loading"></i>课程描述</el-tag>
-                  <el-tag size="50px" style="margin-left: 5px;margin-bottom: 5px;"><i class="el-icon-loading"></i>学分</el-tag>
+                  <el-tag size="50px;" style="margin-left: 3px;margin-bottom: 5px;"><i class="el-icon-loading"></i>课程名称</el-tag>
+                  <el-tag size="50px;" style="margin-left: 3px;margin-bottom: 5px;"><i class="el-icon-loading"></i>课程编号</el-tag>
+                  <el-tag size="50px;" style="margin-left: 3px;margin-bottom: 5px;"><i class="el-icon-loading"></i>课程描述</el-tag>
+                  <el-tag size="50px" style="margin-left: 3px;margin-bottom: 5px;"><i class="el-icon-loading"></i>学分</el-tag>
                   <el-button type="primary" style="margin-left: 10px;" icon="el-icon-delete" size="small" @click="deleteCourse(item.courseId)"></el-button>
                 </template>
                 <el-tag  size="50px" style="margin-left: 5px;margin-bottom: 5px;">{{item.courseName}}</el-tag>
@@ -285,7 +293,7 @@
         pageSize:4,
         total:0,
         currentPageClasses: 1,
-        pageSizeClasses:5,
+        pageSizeClasses:8,
         totalClasses:0,
         search:'',
         isShow:false,

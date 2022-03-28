@@ -1,3 +1,11 @@
+<!--
+ * @Description: 专业
+ * @Author: Wangyl
+ * @Date: 2021-10-07 22:51:12
+ * @LastEditors: Wangyl
+ * @LastEditTime: 2022-03-28 20:53:53
+-->
+
 <template>
   <div class="common-layout">
     <el-container>
@@ -101,7 +109,7 @@
         tableData: [],
         multipleSelection: [],
         currentPage: 1,
-        pageSize:5,
+        pageSize:8,
         total:0,
         /*弹窗*/
         model:false,

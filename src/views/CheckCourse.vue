@@ -1,3 +1,11 @@
+<!--
+ * @Description: 选课
+ * @Author: Wangyl
+ * @Date: 2021-10-20 16:05:11
+ * @LastEditors: Wangyl
+ * @LastEditTime: 2022-03-28 21:25:40
+-->
+
 <template>
   <div class="common-layout">
     <el-container>
@@ -101,10 +109,10 @@
         activeName:'',
         tableData: [],
         currentPage: 1,
-        pageSize:5,
+        pageSize:6,
         total:0,
         currentPageStudent: 1,
-        pageSizeStudent:5,
+        pageSizeStudent:3,
         totalStudent:0,
         search:'',
         isShow:false,

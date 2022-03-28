@@ -1,3 +1,11 @@
+<!--
+ * @Description: 课程管理
+ * @Author: Wangyl
+ * @Date: 2021-10-05 20:04:34
+ * @LastEditors: Wangyl
+ * @LastEditTime: 2022-03-28 21:09:20
+-->
+
 <template>
   <div class="common-layout">
     <el-container>
@@ -441,6 +449,7 @@
         }).then(res=>{
           this.tableData = res.data.list
           this.total = res.data.total
+          console.log(res.data.list)
         })
       },
       //重置

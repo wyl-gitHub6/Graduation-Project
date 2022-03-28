@@ -1,3 +1,11 @@
+<!--
+ * @Description: 成绩管理
+ * @Author: Wangyl
+ * @Date: 2021-12-01 20:32:40
+ * @LastEditors: Wangyl
+ * @LastEditTime: 2022-03-28 20:54:15
+-->
+
 <template>
   <div class="common-layout">
     <el-container>
@@ -110,7 +118,7 @@
         search:'',
         tableData:[],
         currentPage: 1,
-        pageSize:5,
+        pageSize:8,
         total:0,
         labelPosition: 'right',
         score:{},

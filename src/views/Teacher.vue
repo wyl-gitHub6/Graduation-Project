@@ -1,3 +1,11 @@
+<!--
+ * @Description: 教师管理
+ * @Author: Wangyl
+ * @Date: 2021-10-06 19:10:22
+ * @LastEditors: Wangyl
+ * @LastEditTime: 2022-03-28 20:55:40
+-->
+
 <template>
   <div class="common-layout">
     <el-container>
@@ -146,7 +154,7 @@
         tableData: [],
         multipleSelection: [],
         currentPage: 1,
-        pageSize:5,
+        pageSize:8,
         total:0,
         /*弹窗*/
         model:false,

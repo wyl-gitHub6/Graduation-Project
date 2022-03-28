@@ -1,3 +1,11 @@
+<!--
+ * @Description: 选课统计
+ * @Author: Wangyl
+ * @Date: 2021-10-05 18:22:59
+ * @LastEditors: Wangyl
+ * @LastEditTime: 2022-03-28 20:55:02
+-->
+
 <template>
         <v-chart class="chart" :option="option" />
 </template>

@@ -1,3 +1,11 @@
+<!--
+ * @Description: 主页面
+ * @Author: Wangyl
+ * @Date: 2021-10-05 17:59:35
+ * @LastEditors: Wangyl
+ * @LastEditTime: 2022-03-28 20:53:30
+-->
+
 <template>
     <div class="about">
         <v-header />

@@ -1,3 +1,11 @@
+<!--
+ * @Description: 滑动验证码
+ * @Author: Wangyl
+ * @Date: 2022-01-01 15:12:18
+ * @LastEditors: Wangyl
+ * @LastEditTime: 2022-03-28 20:56:10
+-->
+
 <template>
   <div class="jc-component__range">
     <div class="jc-range" :class="rangeStatus ? 'success' : '' ">

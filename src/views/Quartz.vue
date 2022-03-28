@@ -1,3 +1,11 @@
+<!--
+ * @Description: 定时任务
+ * @Author: Wangyl
+ * @Date: 2021-12-25 16:13:53
+ * @LastEditors: Wangyl
+ * @LastEditTime: 2022-03-28 20:54:01
+-->
+
 <template>
   <div class="common-layout">
     <el-container>
@@ -114,7 +122,7 @@
       return {
         tableData: [],
         currentPage: 1,
-        pageSize:5,
+        pageSize:8,
         total:0,
         /*弹窗*/
         model:false,

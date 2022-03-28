@@ -1,3 +1,11 @@
+<!--
+ * @Description: 分班
+ * @Author: Wangyl
+ * @Date: 2021-10-10 19:01:52
+ * @LastEditors: Wangyl
+ * @LastEditTime: 2022-03-28 20:53:05
+-->
+
 <template>
   <div class="common-layout">
     <el-container>
@@ -287,7 +295,7 @@
         studentData: [],
         multipleSelection: [],
         currentPage: 1,
-        pageSize:5,
+        pageSize:8,
         total:0,
         currentPageStudent: 1,
         pageSizeStudent:4,

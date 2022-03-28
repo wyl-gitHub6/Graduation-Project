@@ -1,3 +1,11 @@
+<!--
+ * @Description: 首页
+ * @Author: Wangyl
+ * @Date: 2021-10-05 18:07:49
+ * @LastEditors: Wangyl
+ * @LastEditTime: 2022-03-28 20:53:38
+-->
+
 <template>
   <div class="common-layout">
     <!--第一部分-->

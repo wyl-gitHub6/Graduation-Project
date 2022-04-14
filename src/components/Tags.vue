@@ -1,3 +1,10 @@
+<!--
+ * @Description: 选项卡
+ * @Author: Wangyl
+ * @Date: 2021-10-05 17:58:35
+ * @LastEditors: Wangyl
+ * @LastEditTime: 2022-04-14 19:22:09
+-->
 <template>
     <div class="tags" v-if="showTags">
         <ul>
@@ -91,12 +98,6 @@ export default {
         const handleTags = (command) => {
             command === "other" ? closeOther() : closeAll();
         };
-
-        // 关闭当前页面的标签页
-         /*store.commit("closeCurrentTag", {
-            $router: router,
-            $route: route
-         });*/
 
         return {
             isActive,

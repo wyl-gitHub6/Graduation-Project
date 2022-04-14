@@ -3,7 +3,7 @@
  * @Author: Wangyl
  * @Date: 2021-10-05 20:04:34
  * @LastEditors: Wangyl
- * @LastEditTime: 2022-03-28 21:09:20
+ * @LastEditTime: 2022-04-14 20:40:32
 -->
 
 <template>
@@ -46,7 +46,7 @@
           <el-table-column prop="courseDesc" label="课程描述"> </el-table-column>
           <el-table-column label="照片" width="100px;">
             <template #default="scope">
-              <img :src="scope.row.courseImg" alt="" style="height: 80px;">
+              <img :src="url+scope.row.courseImg" alt="" style="height: 80px;">
             </template>
           </el-table-column>
           <el-table-column label="课程类别" width="100px;">
@@ -184,6 +184,7 @@
   import { Edit } from '@element-plus/icons'
   import request from "../utils/request";
   import { ElMessage } from 'element-plus';
+  import { useStore } from "vuex";
 
   export default {
     name: "Course",
@@ -238,6 +239,7 @@
           {value:0,name:'必修课'},
           {value:1,name:'选修课'},
         ],
+        url:useStore().state.url,
 
         rules:{
           courseName: [
@@ -449,7 +451,6 @@
         }).then(res=>{
           this.tableData = res.data.list
           this.total = res.data.total
-          console.log(res.data.list)
         })
       },
       //重置

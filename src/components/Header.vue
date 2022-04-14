@@ -1,22 +1,25 @@
+<!--
+ * @Description: 页面头部导航栏
+ * @Author: Wangyl
+ * @Date: 2021-10-05 17:58:35
+ * @LastEditors: Wangyl
+ * @LastEditTime: 2022-04-14 20:50:02
+-->
 <template>
     <div class="header">
         <!-- 折叠按钮 -->
-        <div class="collapse-btn" @click="collapseChage">
+        <div class="collapse-btn" @click="collapseChange">
             <i v-if="!collapse" class="el-icon-s-fold"></i>
             <i v-else class="el-icon-s-unfold"></i>
         </div>
         <div class="logo" style="display: flex">
-            <!--<el-image
-                    style="width: 130px; height: 80px;"
-                    :src="url"
-            ></el-image>-->
             <span style="margin-left: 15px;">学生成绩管理系统</span>
         </div>
         <div class="header-right">
             <div class="header-user-con">
                 <!-- 用户头像 -->
-                <div class="user-avator">
-                    <img :src=username.userImg />
+                <div class="user-avatar">
+                    <img :src=userImg />
                 </div>
                 <!-- 用户名下拉菜单 -->
                 <el-dropdown class="user-name" trigger="click" @command="handleCommand">
@@ -27,7 +30,7 @@
                     <template #dropdown>
                         <el-dropdown-menu>
                             <el-dropdown-item command="user">个人中心</el-dropdown-item>
-                            <el-dropdown-item divided command="loginout">退出登录</el-dropdown-item>
+                            <el-dropdown-item divided command="logout">退出登录</el-dropdown-item>
                         </el-dropdown-menu>
                     </template>
                 </el-dropdown>
@@ -65,27 +68,28 @@ export default {
             '#c7158577',
         ];
 
-
         const username = JSON.parse(sessionStorage.getItem("user"));
         const message = 2;
 
         const store = useStore();
         const collapse = computed(() => store.state.collapse);
+        const userImg = store.state.url+username.userImg
+
         // 侧边栏折叠
-        const collapseChage = () => {
+        const collapseChange = () => {
             store.commit("handleCollapse", !collapse.value);
         };
 
         onMounted(() => {
             if (document.body.clientWidth < 1500) {
-                collapseChage();
+                collapseChange();
             }
         });
 
         // 用户名下拉菜单选择事件
         const router = useRouter();
         const handleCommand = (command) => {
-            if (command == "loginout") {
+            if (command == "logout") {
                 ElMessage.success({
                     message: '注销成功!',
                     type: 'success'
@@ -99,18 +103,18 @@ export default {
 
         const state = reactive({
             fits: ['fill', 'contain', 'cover', 'none', 'scale-down'],
-            /*url: require('../assets/img/logo.png'),*/
         })
 
         return {
             username,
             message,
             collapse,
-            collapseChage,
+            collapseChange,
             handleCommand,
             ...toRefs(state),
             color,
             predefineColors,
+            userImg,
         };
     },
     methods:{
@@ -118,10 +122,9 @@ export default {
             document.body.style.setProperty('--background-color',this.color)
             let footColor = colorChange.setFootColor(document.body.style.getPropertyValue('--background-color'),'#ffffff','#000000')
             document.body.style.setProperty('--fontColor',footColor)
-            let lingtcolor = colorChange.LightenDarkenColor(footColor,10)
             this.sidebarColor = 'background-color: var(--background-color)'
         }
-    }
+    },
 };
 </script>
 <style scoped>
@@ -180,10 +183,10 @@ export default {
 .btn-bell .el-icon-bell {
     color: #fff;
 }
-.user-avator {
+.user-avatar {
     margin-right: 10px;
 }
-.user-avator img {
+.user-avatar img {
     display: block;
     width: 40px;
     height: 40px;
@@ -195,14 +198,5 @@ export default {
 }
 .el-dropdown-menu__item {
     text-align: center;
-}
-.user-avator {
-    margin-right: 10px;
-}
-.user-avator img {
-    display: block;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
 }
 </style>

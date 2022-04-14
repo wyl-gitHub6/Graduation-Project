@@ -1,9 +1,17 @@
+/*
+ * @Description: 参数
+ * @Author: Wangyl
+ * @Date: 2021-10-05 17:48:13
+ * @LastEditors: Wangyl
+ * @LastEditTime: 2022-04-14 20:46:41
+ */
 import {createStore} from 'vuex'
 
 export default createStore({
   state: {
     tagsList: [],
-    collapse: false
+    collapse: false,
+    url:'http://localhost:8080/',
   },
   mutations: {
     delTagsItem(state, data) {

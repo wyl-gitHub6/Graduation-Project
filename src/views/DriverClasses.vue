@@ -3,7 +3,7 @@
  * @Author: Wangyl
  * @Date: 2021-10-10 19:01:52
  * @LastEditors: Wangyl
- * @LastEditTime: 2022-03-28 20:53:05
+ * @LastEditTime: 2022-04-09 00:22:39
 -->
 
 <template>
@@ -298,7 +298,7 @@
         pageSize:8,
         total:0,
         currentPageStudent: 1,
-        pageSizeStudent:4,
+        pageSizeStudent:3,
         totalStudent:0,
         /*弹窗*/
         model:false,
@@ -339,11 +339,11 @@
       },
       /*学生列表分页*/
       handleSizeChangeStudent(val) {
-        this.pageSize=val
+        this.pageSizeStudent=val
         this.loadStudent()
       },
       handleCurrentChangeStudent(val) {
-        this.currentPage=val
+        this.currentPageStudent=val
         this.loadStudent()
       },
       /*查看未分班学生与当前班级信息*/

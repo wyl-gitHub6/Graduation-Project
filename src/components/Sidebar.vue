@@ -1,3 +1,10 @@
+<!--
+ * @Description: 页面左侧导航栏
+ * @Author: Wangyl
+ * @Date: 2021-10-05 17:58:35
+ * @LastEditors: Wangyl
+ * @LastEditTime: 2022-04-14 19:23:15
+-->
 <template>
     <div class="sidebar">
         <el-menu class="sidebar-el-menu" :default-active="onRoutes" :collapse="collapse" background-color="#40407a"

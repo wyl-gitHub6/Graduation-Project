@@ -3,7 +3,7 @@
  * @Author: Wangyl
  * @Date: 2021-10-09 11:23:53
  * @LastEditors: Wangyl
- * @LastEditTime: 2022-03-28 20:52:23
+ * @LastEditTime: 2022-04-26 22:34:39
 -->
 
 <template>
@@ -84,7 +84,7 @@
                 <el-input v-model="classes_form.classesName"></el-input>
               </el-form-item>
               <el-form-item label="人数限额" prop="classesAllNumber" :rules="[
-                { required: true, message: '不能为空'},
+                { required: true, message: '人数限额不能为空'},
                 { type: 'number', message: '必须为数字值'}]">
                 <el-input v-model.number="classes_form.classesAllNumber" autocomplete="off"></el-input>
               </el-form-item>

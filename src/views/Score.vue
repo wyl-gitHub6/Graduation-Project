@@ -3,7 +3,7 @@
  * @Author: Wangyl
  * @Date: 2021-12-01 20:32:40
  * @LastEditors: Wangyl
- * @LastEditTime: 2022-03-28 20:54:15
+ * @LastEditTime: 2022-04-28 22:15:58
 -->
 
 <template>
@@ -34,7 +34,13 @@
               <span v-if="scope.row.usualGrade==null" style="color: #20a0ff">未录入</span>
             </template>
           </el-table-column>
-          <el-table-column prop="testGrade" label="考试成绩">
+          <el-table-column prop="stageGrade" label="阶段成绩">
+            <template #default="scope">
+              <span v-if="scope.row.stageGrade!=null && scope.row.stageGrade != ''" style="color: #1abc9c">{{scope.row.stageGrade}}</span>
+              <span v-if="scope.row.stageGrade==null || scope.row.stageGrade == ''" style="color: #20a0ff">未录入</span>
+            </template>
+          </el-table-column>
+          <el-table-column prop="testGrade" label="期末成绩">
             <template #default="scope">
               <span v-if="scope.row.testGrade!=null" style="color: #1abc9c">{{scope.row.testGrade}}</span>
               <span v-if="scope.row.testGrade==null" style="color: #20a0ff">未录入</span>
@@ -54,7 +60,7 @@
           </el-table-column>
           <el-table-column label="操作" width="200">
             <template #default="scope">
-              <el-button type="primary" icon="el-icon-edit" v-if="scope.row.credit !=null"  @click="model=true,btn=false,handleEdit(scope.$index, scope.row)"></el-button>
+              <el-button type="primary" icon="el-icon-edit" v-if="scope.row.credit !=null"  @click="handleEdit(scope.$index, scope.row)"></el-button>
               <el-button type="primary" icon="el-icon-edit" v-if="scope.row.credit ==null" disabled></el-button>
             </template>
           </el-table-column>
@@ -76,28 +82,45 @@
         <!--弹框开始-->
         <div>
           <el-dialog title="更改成绩" v-model="model" width="25%" center>
-            <el-form :label-position="labelPosition" label-width="80px" :model="score"
-                     :rules="rules"
-                     ref="ruleForm">
+            <el-scrollbar ref="scrollOne" height="300px" always @scroll="scroll">
+              <el-form :label-position="labelPosition" label-width="90px" :model="score"
+                      ref="score">
 
-              <el-input v-model="score.scoreId" v-if="isShow"></el-input>
-              <el-form-item label="平时成绩" prop="usualGrade">
-                <el-input v-model="score.usualGrade" @input="test" autocomplete="off"></el-input>
-              </el-form-item>
-              <el-form-item label="考试成绩" prop="testGrade">
-                <el-input v-model="score.testGrade" @input="test" autocomplete="off"></el-input>
-              </el-form-item>
-              <el-form-item label="最终成绩">
-                <el-input v-model="score.scoreGrade" autocomplete="off" readonly></el-input>
-              </el-form-item>
+                <el-input v-model="score.scoreId" v-if="isShow"></el-input>
+                <el-form-item label="平时成绩" prop="usualGrade" :rules="[
+                  { required: true, message: '平时成绩不能为空'},
+                  { type: 'number', message: '必须为数字值'}]">
+                  <el-input v-model.number="score.usualGrade" input-style="width:92%"></el-input>
+                </el-form-item>
+                <el-form-item label="期末成绩" prop="testGrade" :rules="[
+                  { required: true, message: '期末成绩不能为空'},
+                  { type: 'number', message: '必须为数字值'}]">
+                  <el-input v-model.number="score.testGrade" input-style="width:92%"></el-input>
+                </el-form-item>
 
-            </el-form>
-            <template #footer>
-                <span class="dialog-footer">
-                  <el-button @click="model = false">取 消</el-button>
-                  <el-button type="primary" @click="edit('ruleForm')">修 改</el-button>
-                </span>
-            </template>
+                <el-form-item
+                  v-for="(domain, index) in score.domains"
+                  :label="'阶段成绩' + (index + 1)"
+                  :key="domain.key"
+                  :prop="'domains.' + index + '.value'"
+                  :rules="[
+                    {required: true, message: '阶段成绩不能为空'},
+                    { type: 'number', message: '必须为数字值'}]"
+                >
+                  <el-row>
+                    <el-col :span="16"><el-input v-model.number="domain.value"></el-input></el-col>
+                    <el-col :span="1"></el-col>
+                    <el-col :span="7"><el-button @click.prevent="removeDomain(domain)">删除</el-button></el-col>
+                  </el-row>
+                </el-form-item>
+                <div width = "100px">
+                  <el-button style="margin-left: 50px;" type="primary" @click="edit('score')">修 改</el-button>
+                  <el-button style="margin-left: 30px;" type="success" @click="addDomain">新增阶段成绩</el-button>
+                  <el-button style="margin-left: 30px;" @click="model = false">取 消</el-button>
+                </div>
+
+              </el-form>
+             </el-scrollbar> 
           </el-dialog>
         </div>
 
@@ -123,40 +146,13 @@
         labelPosition: 'right',
         score:{},
         model:false,
-
-        rules: {
-          usualGrade: [
-            { required: true, message: '不可为空', trigger: 'blur' },
-            {
-              validator:function (rule,value,callback) {
-                if (/^[0-9]+([.]{1}[0-9]+){0,1}$/.test(value)==false){
-                  callback(new Error("请输入整数"));
-                }else {
-                  callback();
-                }
-              },
-              trigger: "blur"
-            }
-          ],
-          testGrade:[
-            { required: true, message: '不可为空', trigger: 'blur' },
-            {
-              validator:function (rule,value,callback) {
-                if (/^[0-9]+([.]{1}[0-9]+){0,1}$/.test(value)==false){
-                  callback(new Error("请输入整数"));
-                }else {
-                  callback();
-                }
-              },
-              trigger: "blur"
-            }
-          ]
-        }
-
       }
 
     },
     methods:{
+      scroll({ scrollTop }) {
+        this.value = scrollTop
+      },
       /*分页*/
       handleSizeChange(val) {
         this.pageSize=val
@@ -167,13 +163,22 @@
         this.load()
       },
       handleEdit(index, row) {
+        this.model=true
+        this.btn=false
         request.get('/api/score/findById',{
           params:{
             scoreId:row.scoreId
           }
         }).then(res=>{
           if (res.code == 0){
-            this.score = res.data
+
+            this.score.studentId = res.data.studentId
+            this.score.courseId = res.data.course.courseId
+            this.score.usualGrade = res.data.usualGrade
+            this.score.testGrade = res.data.testGrade
+            this.score.scoreId = row.scoreId
+            this.score.domains = [{value: ''}]
+            
           }else{
             console.log(res.message)
           }
@@ -202,6 +207,17 @@
           }
         })
       },
+      removeDomain(item) {
+        var index = this.score.domains.indexOf(item)
+        if (index !== -1) {
+          this.score.domains.splice(index, 1)
+        }
+      },
+      addDomain() {
+        this.score.domains.push({
+          value: ''
+        });
+      },
       load(){
         request.get('/api/score/scoreList',{
           params:{
@@ -215,12 +231,6 @@
           this.total = res.data.total
         })
       },
-    },
-    computed:{
-      /*计算最终成绩*/
-      test(){
-        this.score.scoreGrade = this.score.usualGrade*0.3+this.score.testGrade*0.7
-      }
     },
     created() {
       this.load()

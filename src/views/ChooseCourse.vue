@@ -3,7 +3,7 @@
  * @Author: Wangyl
  * @Date: 2021-10-06 16:54:37
  * @LastEditors: Wangyl
- * @LastEditTime: 2022-03-28 21:17:43
+ * @LastEditTime: 2022-04-28 21:10:55
 -->
 
 <template>
@@ -301,6 +301,7 @@
       }
     },
     methods:{
+      // 安排必修课
       open() {
         this.courseIdr = []
         if (this.multipleSelection.length == 0){

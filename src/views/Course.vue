@@ -3,7 +3,7 @@
  * @Author: Wangyl
  * @Date: 2021-10-05 20:04:34
  * @LastEditors: Wangyl
- * @LastEditTime: 2022-04-14 20:40:32
+ * @LastEditTime: 2022-04-30 16:10:35
 -->
 
 <template>
@@ -100,7 +100,6 @@
               <el-form-item label="课程描述" prop="courseDesc">
                 <el-input v-model="course_form.courseDesc"></el-input>
               </el-form-item>
-
               <el-form-item label="课程周期" prop="courseDate">
                 <div class="block">
                   <el-date-picker
@@ -117,15 +116,21 @@
                   </el-date-picker>
                 </div>
               </el-form-item>
-
-              <el-form-item label="课程类别" prop="courseState">
-                <el-radio v-model="course_form.courseState" :label="0">必修课</el-radio>
-                <el-radio v-model="course_form.courseState" :label="1">选修课</el-radio>
-              </el-form-item>
               <el-form-item v-if="course_form.courseState != 0" label="限制人数" prop="number" :rules="[
                 { required: true, message: '不能为空'},
                 { type: 'number', message: '必须为数字值'}]">
                 <el-input v-model.number="course_form.number"></el-input>
+              </el-form-item>
+              <el-form-item label="任课教师">
+                <el-select v-model="course_form.teacher.teacherId" style="width:350px;" filterable clearable placeholder="请选择">
+                  <el-option
+                          v-for="item in teacherList"
+                          :key="item.teacherId"
+                          :label="item.teacherName"
+                          :value="item.teacherId"
+                  >
+                  </el-option>
+                </el-select>
               </el-form-item>
               <el-form-item label="学分" prop="courseCredit">
                 <el-input-number
@@ -135,17 +140,9 @@
                         label="描述文字"
                 ></el-input-number>
               </el-form-item>
-
-              <el-form-item label="任课教师">
-                <el-select v-model="course_form.teacher.teacherId" filterable clearable placeholder="请选择">
-                  <el-option
-                          v-for="item in teacherList"
-                          :key="item.teacherId"
-                          :label="item.teacherName"
-                          :value="item.teacherId"
-                  >
-                  </el-option>
-                </el-select>
+              <el-form-item label="课程类别" prop="courseState">
+                <el-radio v-model="course_form.courseState" :label="0">必修课</el-radio>
+                <el-radio v-model="course_form.courseState" :label="1">选修课</el-radio>
               </el-form-item>
 
               <el-form-item label="图片" prop="courseImg">

@@ -3,7 +3,7 @@
  * @Author: Wangyl
  * @Date: 2021-10-08 18:34:02
  * @LastEditors: Wangyl
- * @LastEditTime: 2022-03-28 20:53:18
+ * @LastEditTime: 2022-04-30 16:06:29
 -->
 
 <template>
@@ -68,7 +68,7 @@
                 <el-input v-model="grade_form.gradeName"></el-input>
               </el-form-item>
               <el-form-item label="所属院系">
-                <el-select v-model="grade_form.professional.college.collegeId" placeholder="请选择" filterable @change="findByCollegeId">
+                <el-select v-model="grade_form.professional.college.collegeId" style="width:350px;" placeholder="请选择" filterable @change="findByCollegeId">
                   <el-option
                           v-for="item in college_list"
                           :key="item.collegeId"
@@ -78,7 +78,7 @@
                 </el-select>
               </el-form-item>
               <el-form-item label="所属专业">
-                <el-select v-model="grade_form.professional.professionalId" filterable placeholder="请选择">
+                <el-select v-model="grade_form.professional.professionalId" style="width:350px;" filterable placeholder="请选择">
                   <el-option
                           v-for="item in professional_list"
                           :key="item.professionalId"
@@ -135,8 +135,18 @@
         professional_list:[],
 
         rules:{
-          gradeName: [
-            { required: true, message: '请输入年级名称', trigger: 'blur' },
+          gradeName:[
+            {required:true,message:'请输入年级名称',trigger:'blur'},
+            {
+              validator:function (rule,value,callback) {
+                if (/^\d{4}$/.test(value)==false){
+                  callback(new Error("四位数字"));
+                }else {
+                  callback();
+                }
+              },
+              trigger: "blur"
+            }
           ],
         },
       }

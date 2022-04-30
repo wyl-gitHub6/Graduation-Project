@@ -3,7 +3,7 @@
  * @Author: Wangyl
  * @Date: 2021-12-25 16:13:53
  * @LastEditors: Wangyl
- * @LastEditTime: 2022-03-28 20:54:01
+ * @LastEditTime: 2022-04-30 16:11:51
 -->
 
 <template>
@@ -78,7 +78,7 @@
                 <el-input v-model="task_form.beanClass"></el-input>
               </el-form-item>
               <el-form-item label="任务状态" prop="jobStatus">
-                <el-select v-model="task_form.jobStatus" filterable placeholder="请选择">
+                <el-select v-model="task_form.jobStatus" style="width: 330px;" filterable placeholder="请选择">
                   <el-option
                           v-for="item in stateList"
                           :key="item.value"

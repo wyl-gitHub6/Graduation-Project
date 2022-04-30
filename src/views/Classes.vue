@@ -3,7 +3,7 @@
  * @Author: Wangyl
  * @Date: 2021-10-09 11:23:53
  * @LastEditors: Wangyl
- * @LastEditTime: 2022-04-26 22:34:39
+ * @LastEditTime: 2022-04-30 16:07:47
 -->
 
 <template>
@@ -89,7 +89,7 @@
                 <el-input v-model.number="classes_form.classesAllNumber" autocomplete="off"></el-input>
               </el-form-item>
               <el-form-item label="教导教师">
-                <el-select v-model="classes_form.teacher.teacherId" placeholder="请选择" filterable>
+                <el-select v-model="classes_form.teacher.teacherId" style="width:350px;" placeholder="请选择" filterable>
                   <el-option
                           v-for="item in teacher_list"
                           :key="item.teacherId"
@@ -99,7 +99,7 @@
                 </el-select>
               </el-form-item>
               <el-form-item label="所属院系">
-                <el-select v-model="classes_form.grade.professional.college.collegeId" placeholder="请选择" filterable @change="findByCollegeId">
+                <el-select v-model="classes_form.grade.professional.college.collegeId" style="width:350px;" placeholder="请选择" filterable @change="findByCollegeId">
                   <el-option
                           v-for="item in college_list"
                           :key="item.collegeId"
@@ -109,7 +109,7 @@
                 </el-select>
               </el-form-item>
               <el-form-item label="所属专业">
-                <el-select v-model="classes_form.grade.professional.professionalId" filterable placeholder="请选择" @change="findByProfessionalId">
+                <el-select v-model="classes_form.grade.professional.professionalId" style="width:350px;" filterable placeholder="请选择" @change="findByProfessionalId">
                   <el-option
                           v-for="item in professional_list"
                           :key="item.professionalId"
@@ -119,7 +119,7 @@
                 </el-select>
               </el-form-item>
               <el-form-item label="所属年级">
-                <el-select v-model="classes_form.grade.gradeId" filterable placeholder="请选择">
+                <el-select v-model="classes_form.grade.gradeId" style="width:350px;" filterable placeholder="请选择">
                   <el-option
                           v-for="item in grade_list"
                           :key="item.gradeId"

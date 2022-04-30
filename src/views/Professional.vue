@@ -3,7 +3,7 @@
  * @Author: Wangyl
  * @Date: 2021-10-07 22:51:12
  * @LastEditors: Wangyl
- * @LastEditTime: 2022-03-28 20:53:53
+ * @LastEditTime: 2022-04-30 16:01:50
 -->
 
 <template>
@@ -68,7 +68,7 @@
                 <el-input v-model="professional_form.professionalName"></el-input>
               </el-form-item>
               <el-form-item label="所属院系">
-                <el-select v-model="professional_form.college.collegeId" filterable placeholder="请选择">
+                <el-select v-model="professional_form.college.collegeId" style="width:350px;" filterable placeholder="请选择">
                   <el-option
                           v-for="item in college_list"
                           :key="item.collegeId"

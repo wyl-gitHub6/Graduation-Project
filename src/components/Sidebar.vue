@@ -3,11 +3,11 @@
  * @Author: Wangyl
  * @Date: 2021-10-05 17:58:35
  * @LastEditors: Wangyl
- * @LastEditTime: 2022-04-14 19:23:15
+ * @LastEditTime: 2022-05-02 14:53:39
 -->
 <template>
     <div class="sidebar">
-        <el-menu class="sidebar-el-menu" :default-active="onRoutes" :collapse="collapse" background-color="#40407a"
+        <el-menu class="sidebar-el-menu" :default-active="onRoutes" :collapse="collapse" background-color="#34495e"
                  text-color="#ffffff" active-text-color="#1e90ff" unique-opened router>
             <template v-for="item in items">
                 <template v-if="item.subs">

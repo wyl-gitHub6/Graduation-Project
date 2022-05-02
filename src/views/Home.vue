@@ -3,7 +3,7 @@
  * @Author: Wangyl
  * @Date: 2021-10-05 17:59:35
  * @LastEditors: Wangyl
- * @LastEditTime: 2022-03-28 20:53:30
+ * @LastEditTime: 2022-05-02 15:06:40
 -->
 
 <template>
@@ -12,6 +12,7 @@
         <v-sidebar />
         <div class="content-box" :class="{ 'content-collapse': collapse }">
             <v-tags></v-tags>
+            <br>
             <div class="content">
                 <router-view v-slot="{ Component }">
                     <transition name="move" mode="out-in">

@@ -3,7 +3,7 @@
  * @Author: Wangyl
  * @Date: 2021-12-01 20:32:40
  * @LastEditors: Wangyl
- * @LastEditTime: 2022-04-28 22:15:58
+ * @LastEditTime: 2022-05-02 15:26:08
 -->
 
 <template>
@@ -90,12 +90,12 @@
                 <el-form-item label="平时成绩" prop="usualGrade" :rules="[
                   { required: true, message: '平时成绩不能为空'},
                   { type: 'number', message: '必须为数字值'}]">
-                  <el-input v-model.number="score.usualGrade" input-style="width:92%"></el-input>
+                  <el-input v-model.number="score.usualGrade" style="width: 92%;"></el-input>
                 </el-form-item>
                 <el-form-item label="期末成绩" prop="testGrade" :rules="[
                   { required: true, message: '期末成绩不能为空'},
                   { type: 'number', message: '必须为数字值'}]">
-                  <el-input v-model.number="score.testGrade" input-style="width:92%"></el-input>
+                  <el-input v-model.number="score.testGrade" style="width: 92%;"></el-input>
                 </el-form-item>
 
                 <el-form-item

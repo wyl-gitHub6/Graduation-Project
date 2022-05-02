@@ -3,7 +3,7 @@
  * @Author: Wangyl
  * @Date: 2021-10-06 16:54:37
  * @LastEditors: Wangyl
- * @LastEditTime: 2022-04-28 21:10:55
+ * @LastEditTime: 2022-05-02 15:40:26
 -->
 
 <template>
@@ -29,16 +29,16 @@
             >
               <el-descriptions-item v-for="item in courseList">
                 <template #label>
-                  <el-tag size="50px;" style="margin-left: 3px;margin-bottom: 5px;"><i class="el-icon-loading"></i>课程名称</el-tag>
-                  <el-tag size="50px;" style="margin-left: 3px;margin-bottom: 5px;"><i class="el-icon-loading"></i>课程编号</el-tag>
-                  <el-tag size="50px;" style="margin-left: 3px;margin-bottom: 5px;"><i class="el-icon-loading"></i>课程描述</el-tag>
-                  <el-tag size="50px" style="margin-left: 3px;margin-bottom: 5px;"><i class="el-icon-loading"></i>学分</el-tag>
+                  <el-tag style="margin-left: 3px;margin-bottom: 5px;size: 50px;"><i class="el-icon-loading"></i>课程名称</el-tag>
+                  <el-tag style="margin-left: 3px;margin-bottom: 5px;size: 50px;"><i class="el-icon-loading"></i>课程编号</el-tag>
+                  <el-tag style="margin-left: 3px;margin-bottom: 5px;size: 50px;"><i class="el-icon-loading"></i>课程描述</el-tag>
+                  <el-tag style="margin-left: 3px;margin-bottom: 5px;size: 50px;"><i class="el-icon-loading"></i>学分</el-tag>
                   <el-button type="primary" style="margin-left: 10px;" icon="el-icon-delete" size="small" @click="deleteCourse(item.courseId)"></el-button>
                 </template>
-                <el-tag  size="50px" style="margin-left: 5px;margin-bottom: 5px;">{{item.courseName}}</el-tag>
-                <el-tag  size="50px" style="margin-left: 5px;margin-bottom: 5px;">{{item.courseNum}}</el-tag>
-                <el-tag  size="50px" style="margin-left: 5px;margin-bottom: 5px;">{{item.courseDesc}}</el-tag>
-                <el-tag  size="50px" style="margin-left: 5px;margin-bottom: 5px;">{{item.courseCredit}}</el-tag>
+                <el-tag  style="margin-left: 5px;margin-bottom: 5px;size: 50px;">{{item.courseName}}</el-tag>
+                <el-tag  style="margin-left: 5px;margin-bottom: 5px;size: 50px;">{{item.courseNum}}</el-tag>
+                <el-tag  style="margin-left: 5px;margin-bottom: 5px;size: 50px;">{{item.courseDesc}}</el-tag>
+                <el-tag  style="margin-left: 5px;margin-bottom: 5px;size: 50px;">{{item.courseCredit}}</el-tag>
               </el-descriptions-item>
 
             </el-descriptions>
@@ -200,6 +200,7 @@
             </div>
           </div>
           <br><br>
+          <!-- 排课 -->
           <div>
             <el-table
                     ref="multipleTable"
@@ -219,7 +220,7 @@
               <el-table-column prop="courseDesc" label="课程描述"> </el-table-column>
               <el-table-column label="照片" width="100px;">
                 <template #default="scope">
-                  <img :src="scope.row.courseImg" alt="" style="height: 80px;">
+                  <img :src="url+scope.row.courseImg" alt="" style="height: 80px;">
                 </template>
               </el-table-column>
               <el-table-column label="课程类别" width="100px;">
@@ -263,6 +264,7 @@
 <script>
   import request from "../utils/request";
   import { ElMessage } from 'element-plus';
+  import { useStore } from "vuex";
 
   export default {
     name: "ChooseCourse",
@@ -298,6 +300,7 @@
         search:'',
         isShow:false,
         courseIdr:[],
+        url:useStore().state.url,
       }
     },
     methods:{

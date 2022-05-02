@@ -3,7 +3,7 @@
  * @Author: Wangyl
  * @Date: 2021-10-05 17:58:35
  * @LastEditors: Wangyl
- * @LastEditTime: 2022-04-14 20:50:02
+ * @LastEditTime: 2022-05-02 14:40:30
 -->
 <template>
     <div class="header">
@@ -48,10 +48,10 @@ import { defineComponent, reactive, toRefs } from 'vue'
 import {ElMessage} from "element-plus";
 export default {
     setup() {
-        const color = '#474787';
+        const color = '#2c3e50';
 
         const predefineColors = [
-            '#143556',
+            '#2c3e50',
             '#ff4500',
             '#ff8c00',
             '#ffd700',

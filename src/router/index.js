@@ -3,7 +3,7 @@
  * @Author: Wangyl
  * @Date: 2021-10-05 17:48:13
  * @LastEditors: Wangyl
- * @LastEditTime: 2022-04-14 20:06:44
+ * @LastEditTime: 2022-05-02 14:47:02
  */
 import { createRouter, createWebHistory } from 'vue-router'
 
@@ -173,7 +173,8 @@ const routes = [
         path:'/captcha',
         name: "captcha",
         meta: {
-          title: '定时任务',
+          title: '验证码',
+          requireAuth: true
         },
         component:()=>import('../views/Captcha')
       },

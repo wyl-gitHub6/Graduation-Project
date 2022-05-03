@@ -3,7 +3,7 @@
  * @Author: Wangyl
  * @Date: 2021-10-05 17:48:13
  * @LastEditors: Wangyl
- * @LastEditTime: 2022-05-02 14:47:02
+ * @LastEditTime: 2022-05-03 16:25:25
  */
 import { createRouter, createWebHistory } from 'vue-router'
 
@@ -74,7 +74,7 @@ const routes = [
         path:'/chooseCourse',
         name: "chooseCourse",
         meta: {
-          title: '必修课',
+          title: '必修课管理',
           requireAuth: true
         },
         component:()=>import('../views/ChooseCourse')
@@ -83,7 +83,7 @@ const routes = [
         path:'/checkCourse',
         name: "checkCourse",
         meta: {
-          title: '选修课',
+          title: '选修课详情',
           requireAuth: true
         },
         component:()=>import('../views/CheckCourse')

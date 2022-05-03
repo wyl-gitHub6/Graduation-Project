@@ -3,7 +3,7 @@
  * @Author: Wangyl
  * @Date: 2021-10-09 11:23:53
  * @LastEditors: Wangyl
- * @LastEditTime: 2022-04-30 16:07:47
+ * @LastEditTime: 2022-05-03 15:08:47
 -->
 
 <template>
@@ -48,7 +48,7 @@
             </template>
           </el-table-column>
           <el-table-column prop="grade.professional.college.collegeName" label="所属院系"> </el-table-column>
-          <el-table-column prop="grade.professional.professionalName" label="所属专业"> </el-table-column>
+          <el-table-column prop="grade.professional.professionalName" label="所属专业" width="150px;"> </el-table-column>
           <el-table-column prop="grade.gradeName" label="所属年级"> </el-table-column>
           <el-table-column prop="teacher.teacherName" label="教导教师"> </el-table-column>
           <el-table-column label="操作" width="200">

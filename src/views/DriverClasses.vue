@@ -3,7 +3,7 @@
  * @Author: Wangyl
  * @Date: 2021-10-10 19:01:52
  * @LastEditors: Wangyl
- * @LastEditTime: 2022-04-09 00:22:39
+ * @LastEditTime: 2022-05-03 15:25:43
 -->
 
 <template>
@@ -51,7 +51,7 @@
           <el-table-column label="操作" width="200">
             <template #default="scope">
               <el-button type="primary" v-if="scope.row.classesNumber != scope.row.classesAllNumber" icon="el-icon-loading"
-                         @click="title='添加学生',Model=true,handleDelete(scope.$index, scope.row),loadStudent()">分班</el-button>
+                         @click="title='添加学生',Model=true,currentClasses(scope.row),loadStudent()">分班</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -347,7 +347,7 @@
         this.loadStudent()
       },
       /*查看未分班学生与当前班级信息*/
-      handleDelete(index, row) {
+      currentClasses(row) {
         request.get('/api/classes/findById',{
           params:{
             classesId:row.classesId,
@@ -366,6 +366,11 @@
             pageSize:this.pageSizeStudent
           }
         }).then(res=>{
+          if (res.data == null){
+            this.studentData = []
+            this.totalStudent = 0
+            return
+          }
           this.studentData = res.data.list
           this.totalStudent = res.data.total
         })
